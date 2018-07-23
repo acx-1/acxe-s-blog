@@ -79,19 +79,21 @@
 
 
 
-<meta name="description" content="知识导入xml解析&amp;emsp;&amp;emsp; dom4j解析 反射&amp;emsp;&amp;emsp; 有完整类名，并且含有空参构造函数，如何创建出对象？ //使用反射创建对象 Class clazz = Class.forName(&amp;quot;xxx&amp;quot;); clazz.newInstance(); filter过滤器 过滤来自浏览器发送的请求.在请求到达访问资源之前.会先经过过滤器. 可以完成批处理">
+<meta name="description" content="知识导入xml解析&amp;emsp;&amp;emsp; dom4j解析 反射&amp;emsp;&amp;emsp; 有完整类名，并且含有空参构造函数，如何创建出对象？ //使用反射创建对象 Class clazz = Class.forName(&amp;quot;xxx&amp;quot;); clazz.newInstance();">
 <meta name="keywords" content="Struts2，ssh">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Struts2学习笔记">
 <meta property="og:url" content="http://yoursite.com/2018/07/23/Struts2学习笔记/index.html">
 <meta property="og:site_name" content="Acxer">
-<meta property="og:description" content="知识导入xml解析&amp;emsp;&amp;emsp; dom4j解析 反射&amp;emsp;&amp;emsp; 有完整类名，并且含有空参构造函数，如何创建出对象？ //使用反射创建对象 Class clazz = Class.forName(&amp;quot;xxx&amp;quot;); clazz.newInstance(); filter过滤器 过滤来自浏览器发送的请求.在请求到达访问资源之前.会先经过过滤器. 可以完成批处理">
+<meta property="og:description" content="知识导入xml解析&amp;emsp;&amp;emsp; dom4j解析 反射&amp;emsp;&amp;emsp; 有完整类名，并且含有空参构造函数，如何创建出对象？ //使用反射创建对象 Class clazz = Class.forName(&amp;quot;xxx&amp;quot;); clazz.newInstance();">
 <meta property="og:locale" content="zh-Hans">
 <meta property="og:image" content="http://yoursite.com/2018/07/23/images/struts2/struts-mini%E5%9B%BE%E8%A7%A3.png">
-<meta property="og:updated_time" content="2018-07-23T09:20:17.574Z">
+<meta property="og:image" content="http://yoursite.com/2018/07/23/images/struts2/struts2%E7%9A%84%E6%9E%B6%E6%9E%84.png">
+<meta property="og:image" content="http://yoursite.com/2018/07/23/images/struts2/%E5%8A%A8%E6%80%81%E6%96%B9%E6%B3%95%E8%B0%83%E7%94%A8.png">
+<meta property="og:updated_time" content="2018-07-23T09:54:39.969Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Struts2学习笔记">
-<meta name="twitter:description" content="知识导入xml解析&amp;emsp;&amp;emsp; dom4j解析 反射&amp;emsp;&amp;emsp; 有完整类名，并且含有空参构造函数，如何创建出对象？ //使用反射创建对象 Class clazz = Class.forName(&amp;quot;xxx&amp;quot;); clazz.newInstance(); filter过滤器 过滤来自浏览器发送的请求.在请求到达访问资源之前.会先经过过滤器. 可以完成批处理">
+<meta name="twitter:description" content="知识导入xml解析&amp;emsp;&amp;emsp; dom4j解析 反射&amp;emsp;&amp;emsp; 有完整类名，并且含有空参构造函数，如何创建出对象？ //使用反射创建对象 Class clazz = Class.forName(&amp;quot;xxx&amp;quot;); clazz.newInstance();">
 <meta name="twitter:image" content="http://yoursite.com/2018/07/23/images/struts2/struts-mini%E5%9B%BE%E8%A7%A3.png">
 
 
@@ -359,7 +361,8 @@
 <pre><code>//使用反射创建对象
 Class clazz = Class.forName(&quot;xxx&quot;);
 clazz.newInstance();
-</code></pre><h2 id="filter过滤器"><a href="#filter过滤器" class="headerlink" title="filter过滤器"></a>filter过滤器</h2><ul>
+</code></pre><a id="more"></a>
+<h2 id="filter过滤器"><a href="#filter过滤器" class="headerlink" title="filter过滤器"></a>filter过滤器</h2><ul>
 <li>过滤来自浏览器发送的请求.在请求到达访问资源之前.会先经过过滤器.</li>
 <li>可以完成批处理. 还可以根据filterChain来决定是否放行.</li>
 <li>也可以使用请求转发,或重定向,不让请求到目标路径.<h2 id="自己定义一个struts-Mini"><a href="#自己定义一个struts-Mini" class="headerlink" title="自己定义一个struts-Mini"></a>自己定义一个struts-Mini</h2><img src="../images/struts2/struts-mini%E5%9B%BE%E8%A7%A3.png" alt="struts-mini图解"></li>
@@ -369,7 +372,9 @@ clazz.newInstance();
 <li>三大框架：SSH=&gt;Struts,Spring,Hibernate<br>&emsp; Struts的版本：<br>&emsp;&emsp; Struts1（已经淘汰）<br>&emsp;&emsp; Struts2（我们要学的）也叫xwork。</li>
 <li>三大框架的作用？<br>&emsp; 简化我们的开发，降低开发成本，提高开发效率<br>&emsp;Struts=&gt; WEB层框架：<br>&emsp;&emsp; 优势：<br>&emsp;&emsp; &emsp; 1.不用侵入性比较高的Servlet.可以直接写普通java类作为处理请求逻辑的处理类.这样更易于测试.<br>&emsp;&emsp; &emsp; 2.整合了一些之前需要手动来做的功能. 后台验证,表单回显,自动将表单参数封装,防止表单重复提交，如果不够用我们还可以扩展框架的功能.</li>
 </ul>
-<h2 id="Struts2的HelloWorld"><a href="#Struts2的HelloWorld" class="headerlink" title="Struts2的HelloWorld"></a>Struts2的HelloWorld</h2><pre><code>//cn.pinzhi.action.HelloAction
+<h2 id="Struts2的HelloWorld"><a href="#Struts2的HelloWorld" class="headerlink" title="Struts2的HelloWorld"></a>Struts2的HelloWorld</h2><pre><code>//---------------------------------
+//cn.pinzhi.action.HelloAction
+//-----------------------------
     package cn.pinzhi.action;
     public class HelloAction {
         public String execute(){
@@ -377,7 +382,9 @@ clazz.newInstance();
             return &quot;success&quot;; // 结果页面命名
         }
     }
+//-----------------------------------------
 //src下的struts.xml
+//------------------------------------------
 &lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot; ?&gt;
 &lt;!DOCTYPE struts PUBLIC
 &quot;-//Apache Software Foundation//DTD Struts Configuration 2.3//EN&quot;
@@ -400,7 +407,75 @@ clazz.newInstance();
         &lt;/action&gt;
     &lt;/package&gt;
 &lt;/struts&gt;
-</code></pre>
+//------------------------------------
+//web.xml
+//------------------------------------
+&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot;?&gt;
+&lt;web-app xmlns:xsi=&quot;http://www.w3.org/2001/XMLSchema-instance&quot; xmlns=&quot;http://java.sun.com/xml/ns/javaee&quot; xsi:schemaLocation=&quot;http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-app_3_0.xsd&quot; version=&quot;3.0&quot;&gt;
+    &lt;display-name&gt;helloStruts&lt;/display-name&gt;
+     &lt;!-- 重要：配置struts2的核心过滤器 --&gt;
+     &lt;!--配置struts2的过滤器，要放到其他过滤器后面，保证其他过滤器可以执行  --&gt;
+     &lt;filter&gt;
+            &lt;filter-name&gt;struts2&lt;/filter-name&gt;
+            &lt;filter-class&gt;org.apache.struts2.dispatcher.ng.filter.StrutsPrepareAndExecuteFilter&lt;/filter-class&gt;
+    &lt;/filter&gt;
+    &lt;filter-mapping&gt;
+            &lt;filter-name&gt;struts2&lt;/filter-name&gt;
+            &lt;url-pattern&gt;/*&lt;/url-pattern&gt;
+     &lt;/filter-mapping&gt;
+ &lt;/web-app&gt;
+ //---------------------------
+</code></pre><h2 id="struts2的架构"><a href="#struts2的架构" class="headerlink" title="struts2的架构"></a>struts2的架构</h2><h3 id="struts2的架构图解"><a href="#struts2的架构图解" class="headerlink" title="struts2的架构图解"></a>struts2的架构图解</h3><p><img src="../images/struts2/struts2%E7%9A%84%E6%9E%B6%E6%9E%84.png" alt="struts2的架构"></p>
+<h3 id="struts2中的6个配置文件"><a href="#struts2中的6个配置文件" class="headerlink" title="struts2中的6个配置文件"></a>struts2中的6个配置文件</h3><ol>
+<li>default.properties ：用于配置struts 常量。例如：编码</li>
+<li>struts-default.xml ：struts提供的默认核心配置文件，struts大部分功能都在此配置文件中。</li>
+<li>struts-plugin.xml ： struts插件核心配置文件，struts整合其他框架或工具。</li>
+</ol>
+<ul>
+<li>以上三个文件，用户自己不进行修改。</li>
+</ul>
+<ol start="4">
+<li>struts.xml ：用户自定义核心配置文件。<br>&emsp;  struts.xml 可以配置所有内容，包括：常量,如：<br>&emsp;&emsp; <constant name="struts.i18n.encoding" value="GBK"></constant> //配置编码</li>
+<li>struts.properties ： 用于自定义struts常量配置文件。一般不使用。</li>
+<li>web.xml ：也可以配置struts常量<br>@@@注意：如果配置常量，所有的配置文件存在优先级，编号越大优先级越高。<h3 id="常见的struts常量"><a href="#常见的struts常量" class="headerlink" title="常见的struts常量"></a>常见的struts常量</h3></li>
+<li>用于配置项目编码//struts.i18n.encoding=UTF-8</li>
+<li>struts整合spring需要配置，默认注释掉了//struts.objectFactory = spring</li>
+<li>struts默认使用文件上传解析工具：apache-commons-fileupload<br>struts.multipart.parser=jakarta</li>
+<li>临时文件保存位置//struts.multipart.saveDir=</li>
+<li>上传文件最大大小，默认值：2M，单位字节//struts.multipart.maxSize</li>
+<li>用于设置action请求路径扩展名。默认：action或空。多个值使用逗号分隔//struts.action.extension=action,,<br>例如：/hello/userAction 或 /hello/userAction.action</li>
+<li>确定是否使用动态方法调用。默认关闭的。//struts.enable.DynamicMethodInvocation = false</li>
+<li>设置开发模式，默认关闭。如果设置true：将提供更多提示信息，自动加载文件。//struts.devMode = false</li>
+<li>自动重新加载国际化资源文件//struts.i18n.reload = true</li>
+<li>自动冲洗加载xml配置文件。例如：struts.xml。但不会自动加载action类。//struts.configuration.xml.reload = true</li>
+<li>设置struts标签主题，默认值：xhtml。取值：simple。//struts.ui.theme=xhtml<br>//开发中常用simple。xhtml存在默认布局，开发中布局使用美工提供页面，布局自定义。</li>
+</ol>
+<h3 id="struts-xml详解"><a href="#struts-xml详解" class="headerlink" title="struts.xml详解"></a>struts.xml详解</h3><ul>
+<li><constant> 用于配置struts常量<br>—name：struts提供固定常量名称。此名称从 default.properties文件获得<br>—value：常量值<br>例如：<constant name="struts.devMode" value="true"></constant>
+</constant></li>
+<li><p><package> struts用于管理所有action类<br>—name：给当前包进行唯一命名，必填项。用于其他包继承的。<br>例如：struts-default.xml/<package name="struts-default" abstract="true"></package></package></p>
+</li>
+<li><p>将struts已经完成的功能，作为一个包存在。名称是固定值struts-default。<br>—namespace：action访问路径前缀。<br>例如：”/“<br>“/hello”<br>“/a/b/c”<br>“”<br>—extends：用于继承其他包的。<br>例如：<package extends="struts-default"> 当前action继承struts已经完成功能。<br>—abstract：是否抽象，如果设置为true，表示没有具体action实现功能。(了解)</package></p>
+</li>
+<li><p><action> 用于配置action类（请求处理类）<br>—name：action名称，用于在请求路径进行访问<br>—class：action类全限定类名<br>—method:用于确定action类中需要执行的方法，默认值：execute</action></p>
+</li>
+<li><p><result> 用于配置结果集<br>—name：用于确定action类中，方法的返回值<br>—text：标签体用于设置jsp路径<br>—type:结果集类型<br>&emsp; — dispatcher：请求转发，从一个action到jsp页面，默认值。<br>&emsp;— redirect：重定向到jsp页面<br>&emsp;— redirectAction：重定向到另一个action<br>&emsp;— stream：以流的方法发送浏览器，用于文件下载。<br>&emsp;— chain：链，在一次请求中，从一个action到另一个action</result></p>
+</li>
+<li><p><result-types> 用于配置结果集类型的，一般不用，但需要看的懂。</result-types></p>
+</li>
+<li><p><interceptors> 用于配置拦截器<br>— <interceptor> 用于注册拦截器的<br>—<interceptor-stack> 拦截器栈，将已经注册的拦截器组合在一起，形成一个栈。<br>例如：<interceptor-stack name="defaultStack"> 声明一个拦截器栈，名称是：defaultStack</interceptor-stack></interceptor-stack></interceptor></interceptors></p>
+</li>
+<li><p><default-interceptor-ref>用于确定当前默认拦截器的<br>例如：<default-interceptor-ref name="defaultStack"> 将“defaultStack”拦截器栈，声明默认拦截器栈</default-interceptor-ref></default-interceptor-ref></p>
+</li>
+<li><p><default-action-ref> 如果访问的action不存在，默认执行的aciton。<br>例如：/a/b/c/d/oneAction 此aciton没有配置，默认情况返回action找不到<br>!!!如果配置<default-action-ref> 如果存在404时，不显示action找不到，而是指定action</default-action-ref></default-action-ref></p>
+</li>
+<li><p><default-class-ref> 用于配置 默认action实现类<br>例如：<default-class-ref class="com.opensymphony.xwork2.ActionSupport"><br>!!!如果编写配置文件时没有声明class属性，及<action name=""> 将执行ActionSupport类。</action></default-class-ref></default-class-ref></p>
+</li>
+<li><p><include> 将多个struts配置文件组合成一个。<br>struts.xml 入口配置文件，大家共用的。用于存放通用模块。<br>&emsp;<include file="struts-user.xml"><br>&emsp;<include file="struts-book.xml"><br>提供子配置文件<br>&emsp;struts-user.xml<br>&emsp;struts-book.xml</include></include></include></p>
+</li>
+</ul>
+<h3 id="动态方法调用"><a href="#动态方法调用" class="headerlink" title="动态方法调用"></a>动态方法调用</h3><p><img src="../images/struts2/%E5%8A%A8%E6%80%81%E6%96%B9%E6%B3%95%E8%B0%83%E7%94%A8.png" alt="动态方法调用"></p>
+
       
     </div>
     
@@ -570,7 +645,7 @@ clazz.newInstance();
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#知识导入"><span class="nav-number">1.</span> <span class="nav-text">知识导入</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#xml解析"><span class="nav-number">1.1.</span> <span class="nav-text">xml解析</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#反射"><span class="nav-number">1.2.</span> <span class="nav-text">反射</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#filter过滤器"><span class="nav-number">1.3.</span> <span class="nav-text">filter过滤器</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#自己定义一个struts-Mini"><span class="nav-number">1.4.</span> <span class="nav-text">自己定义一个struts-Mini</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Struts2"><span class="nav-number">2.</span> <span class="nav-text">Struts2</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#框架相关"><span class="nav-number">2.1.</span> <span class="nav-text">框架相关</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Struts2的HelloWorld"><span class="nav-number">2.2.</span> <span class="nav-text">Struts2的HelloWorld</span></a></li></ol></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#知识导入"><span class="nav-number">1.</span> <span class="nav-text">知识导入</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#xml解析"><span class="nav-number">1.1.</span> <span class="nav-text">xml解析</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#反射"><span class="nav-number">1.2.</span> <span class="nav-text">反射</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#filter过滤器"><span class="nav-number">1.3.</span> <span class="nav-text">filter过滤器</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#自己定义一个struts-Mini"><span class="nav-number">1.4.</span> <span class="nav-text">自己定义一个struts-Mini</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Struts2"><span class="nav-number">2.</span> <span class="nav-text">Struts2</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#框架相关"><span class="nav-number">2.1.</span> <span class="nav-text">框架相关</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Struts2的HelloWorld"><span class="nav-number">2.2.</span> <span class="nav-text">Struts2的HelloWorld</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#struts2的架构"><span class="nav-number">2.3.</span> <span class="nav-text">struts2的架构</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#struts2的架构图解"><span class="nav-number">2.3.1.</span> <span class="nav-text">struts2的架构图解</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#struts2中的6个配置文件"><span class="nav-number">2.3.2.</span> <span class="nav-text">struts2中的6个配置文件</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#常见的struts常量"><span class="nav-number">2.3.3.</span> <span class="nav-text">常见的struts常量</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#struts-xml详解"><span class="nav-number">2.3.4.</span> <span class="nav-text">struts.xml详解</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#动态方法调用"><span class="nav-number">2.3.5.</span> <span class="nav-text">动态方法调用</span></a></li></ol></li></ol></li></ol></div>
             
 
           </div>

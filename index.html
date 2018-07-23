@@ -351,55 +351,19 @@
 
       
         
-          
-            <h1 id="知识导入"><a href="#知识导入" class="headerlink" title="知识导入"></a>知识导入</h1><h2 id="xml解析"><a href="#xml解析" class="headerlink" title="xml解析"></a>xml解析</h2><p>&emsp;&emsp; dom4j解析</p>
+          <h1 id="知识导入"><a href="#知识导入" class="headerlink" title="知识导入"></a>知识导入</h1><h2 id="xml解析"><a href="#xml解析" class="headerlink" title="xml解析"></a>xml解析</h2><p>&emsp;&emsp; dom4j解析</p>
 <h2 id="反射"><a href="#反射" class="headerlink" title="反射"></a>反射</h2><p>&emsp;&emsp; 有完整类名，并且含有空参构造函数，如何创建出对象？</p>
 <pre><code>//使用反射创建对象
 Class clazz = Class.forName(&quot;xxx&quot;);
 clazz.newInstance();
-</code></pre><h2 id="filter过滤器"><a href="#filter过滤器" class="headerlink" title="filter过滤器"></a>filter过滤器</h2><ul>
-<li>过滤来自浏览器发送的请求.在请求到达访问资源之前.会先经过过滤器.</li>
-<li>可以完成批处理. 还可以根据filterChain来决定是否放行.</li>
-<li>也可以使用请求转发,或重定向,不让请求到目标路径.<h2 id="自己定义一个struts-Mini"><a href="#自己定义一个struts-Mini" class="headerlink" title="自己定义一个struts-Mini"></a>自己定义一个struts-Mini</h2><img src="../images/struts2/struts-mini%E5%9B%BE%E8%A7%A3.png" alt="struts-mini图解"></li>
-</ul>
-<h1 id="Struts2"><a href="#Struts2" class="headerlink" title="Struts2"></a>Struts2</h1><h2 id="框架相关"><a href="#框架相关" class="headerlink" title="框架相关"></a>框架相关</h2><ul>
-<li>什么是框架？<br>&emsp; 微观：由一个一个类构成的包，包再构成框架<br>&emsp; 宏观：半成品的项目，我们需要执行什么业务时，为框架填写业务逻辑即可</li>
-<li>三大框架：SSH=&gt;Struts,Spring,Hibernate<br>&emsp; Struts的版本：<br>&emsp;&emsp; Struts1（已经淘汰）<br>&emsp;&emsp; Struts2（我们要学的）也叫xwork。</li>
-<li>三大框架的作用？<br>&emsp; 简化我们的开发，降低开发成本，提高开发效率<br>&emsp;Struts=&gt; WEB层框架：<br>&emsp;&emsp; 优势：<br>&emsp;&emsp; &emsp; 1.不用侵入性比较高的Servlet.可以直接写普通java类作为处理请求逻辑的处理类.这样更易于测试.<br>&emsp;&emsp; &emsp; 2.整合了一些之前需要手动来做的功能. 后台验证,表单回显,自动将表单参数封装,防止表单重复提交，如果不够用我们还可以扩展框架的功能.</li>
-</ul>
-<h2 id="Struts2的HelloWorld"><a href="#Struts2的HelloWorld" class="headerlink" title="Struts2的HelloWorld"></a>Struts2的HelloWorld</h2><pre><code>//cn.pinzhi.action.HelloAction
-    package cn.pinzhi.action;
-    public class HelloAction {
-        public String execute(){
-            System.out.println(&quot;hello world&quot;);
-            return &quot;success&quot;; // 结果页面命名
-        }
-    }
-//src下的struts.xml
-&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot; ?&gt;
-&lt;!DOCTYPE struts PUBLIC
-&quot;-//Apache Software Foundation//DTD Struts Configuration 2.3//EN&quot;
-&quot;http://struts.apache.org/dtds/struts-2.3.dtd&quot;&gt;
-&lt;struts&gt;
-&lt;!-- name:单纯的给包起一个名字，不要与其他包名重复
-    namespace:为action访问加上一层或多层路径
-    etends：继承一个其他包，目的是引入其他包的配置
- --&gt;
-    &lt;package name=&quot;hello&quot; namespace=&quot;/&quot; extends=&quot;struts-default&quot;&gt;
-        &lt;!--name:为action类加上一个标识，在访问时填入name名称，就可以找到action  
-            class：action完整类名
-            method：处理的方法
-        --&gt;
-        &lt;action name=&quot;hello&quot; class=&quot;cn.pinzhi.action.HelloAction&quot;  method=&quot;execute&quot;&gt;
-          &lt;!--name：返回结果的标识，用于找到结果路径
-              type：可以决定跳转到结果的方式=》转发，重定向。。。
-           --&gt;
-            &lt;result name=&quot;success&quot;&gt;/success.jsp&lt;/result&gt;
-        &lt;/action&gt;
-    &lt;/package&gt;
-&lt;/struts&gt;
 </code></pre>
-          
+          <!--noindex-->
+          <div class="post-button text-center">
+            <a class="btn" href="/2018/07/23/Struts2学习笔记/#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
+          <!--/noindex-->
         
       
     </div>

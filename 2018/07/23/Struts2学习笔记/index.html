@@ -90,7 +90,7 @@
 <meta property="og:image" content="http://yoursite.com/images/struts2/struts-mini%E5%9B%BE%E8%A7%A3.png">
 <meta property="og:image" content="http://yoursite.com/images/struts2/struts2%E7%9A%84%E6%9E%B6%E6%9E%84.png">
 <meta property="og:image" content="http://yoursite.com/images/struts2/%E5%8A%A8%E6%80%81%E6%96%B9%E6%B3%95%E8%B0%83%E7%94%A8.png">
-<meta property="og:updated_time" content="2018-07-23T09:59:40.013Z">
+<meta property="og:updated_time" content="2018-07-23T11:16:02.915Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Struts2学习笔记">
 <meta name="twitter:description" content="知识导入xml解析&amp;emsp;&amp;emsp; dom4j解析 反射&amp;emsp;&amp;emsp; 有完整类名，并且含有空参构造函数，如何创建出对象？ //使用反射创建对象 Class clazz = Class.forName(&amp;quot;xxx&amp;quot;); clazz.newInstance();">
@@ -365,8 +365,9 @@ clazz.newInstance();
 <h2 id="filter过滤器"><a href="#filter过滤器" class="headerlink" title="filter过滤器"></a>filter过滤器</h2><ul>
 <li>过滤来自浏览器发送的请求.在请求到达访问资源之前.会先经过过滤器.</li>
 <li>可以完成批处理. 还可以根据filterChain来决定是否放行.</li>
-<li>也可以使用请求转发,或重定向,不让请求到目标路径.<h2 id="自己定义一个struts-Mini"><a href="#自己定义一个struts-Mini" class="headerlink" title="自己定义一个struts-Mini"></a>自己定义一个struts-Mini</h2><img src="/images/struts2/struts-mini%E5%9B%BE%E8%A7%A3.png" alt="struts-mini图解"></li>
+<li>也可以使用请求转发,或重定向,不让请求到目标路径.</li>
 </ul>
+<h2 id="自己定义一个struts-Mini"><a href="#自己定义一个struts-Mini" class="headerlink" title="自己定义一个struts-Mini"></a>自己定义一个struts-Mini</h2><p><img src="/images/struts2/struts-mini%E5%9B%BE%E8%A7%A3.png" alt="struts-mini图解"></p>
 <h1 id="Struts2"><a href="#Struts2" class="headerlink" title="Struts2"></a>Struts2</h1><h2 id="框架相关"><a href="#框架相关" class="headerlink" title="框架相关"></a>框架相关</h2><ul>
 <li>什么是框架？<br>&emsp; 微观：由一个一个类构成的包，包再构成框架<br>&emsp; 宏观：半成品的项目，我们需要执行什么业务时，为框架填写业务逻辑即可</li>
 <li>三大框架：SSH=&gt;Struts,Spring,Hibernate<br>&emsp; Struts的版本：<br>&emsp;&emsp; Struts1（已经淘汰）<br>&emsp;&emsp; Struts2（我们要学的）也叫xwork。</li>
@@ -435,7 +436,7 @@ clazz.newInstance();
 <li>以上三个文件，用户自己不进行修改。</li>
 </ul>
 <ol start="4">
-<li>struts.xml ：用户自定义核心配置文件。<br>&emsp;  struts.xml 可以配置所有内容，包括：常量,如：<br>&emsp;&emsp; <constant name="struts.i18n.encoding" value="GBK"></constant> //配置编码</li>
+<li>struts.xml ：用户自定义核心配置文件。<br>&emsp;  struts.xml 可以配置所有内容，包括：常量,如：<br>&emsp;&emsp; &lt; constant name=”struts.i18n.encoding” value=”GBK”&gt; &lt; /constant&gt;  //配置编码</li>
 <li>struts.properties ： 用于自定义struts常量配置文件。一般不使用。</li>
 <li>web.xml ：也可以配置struts常量<br>@@@注意：如果配置常量，所有的配置文件存在优先级，编号越大优先级越高。</li>
 </ol>
@@ -453,27 +454,25 @@ clazz.newInstance();
 <li>设置struts标签主题，默认值：xhtml。取值：simple。//struts.ui.theme=xhtml<br>//开发中常用simple。xhtml存在默认布局，开发中布局使用美工提供页面，布局自定义。</li>
 </ol>
 <h3 id="struts-xml详解"><a href="#struts-xml详解" class="headerlink" title="struts.xml详解"></a>struts.xml详解</h3><ul>
-<li><constant> 用于配置struts常量<br>—name：struts提供固定常量名称。此名称从 default.properties文件获得<br>—value：常量值<br>例如：<constant name="struts.devMode" value="true"></constant>
-</constant></li>
-<li><p><package> struts用于管理所有action类<br>—name：给当前包进行唯一命名，必填项。用于其他包继承的。<br>例如：struts-default.xml/<package name="struts-default" abstract="true"></package></package></p>
+<li><p>&lt; constant&gt; 用于配置struts常量<br>—name：struts提供固定常量名称。此名称从 default.properties文件获得<br>—value：常量值<br>例如：&lt;constant name=”struts.devMode” value=”true”&gt; &lt;/constant&gt; </p>
 </li>
-<li><p>将struts已经完成的功能，作为一个包存在。名称是固定值struts-default。<br>—namespace：action访问路径前缀。<br>例如：”/“<br>“/hello”<br>“/a/b/c”<br>“”<br>—extends：用于继承其他包的。<br>例如：<package extends="struts-default"> 当前action继承struts已经完成功能。<br>—abstract：是否抽象，如果设置为true，表示没有具体action实现功能。(了解)</package></p>
+<li><p>&lt;package&gt; struts用于管理所有action类<br>—name：给当前包进行唯一命名，必填项。用于其他包继承的。<br>例如：struts-default.xml//&lt;package name=”struts-default” abstract=”true”&gt; //将struts已经完成的功能，作为一个包存在。名称是固定值struts-default。<br>—namespace：action访问路径前缀。<br>例如：”/“<br>“/hello”<br>“/a/b/c”<br>“”<br>—extends：用于继承其他包的。<br>例如：&lt;package extends=”struts-default”&gt;  当前action继承struts已经完成功能。<br>—abstract：是否抽象，如果设置为true，表示没有具体action实现功能。(了解)</p>
 </li>
-<li><p><action> 用于配置action类（请求处理类）<br>—name：action名称，用于在请求路径进行访问<br>—class：action类全限定类名<br>—method:用于确定action类中需要执行的方法，默认值：execute</action></p>
+<li><p>&lt;action&gt;  用于配置action类（请求处理类）<br>—name：action名称，用于在请求路径进行访问<br>—class：action类全限定类名<br>—method:用于确定action类中需要执行的方法，默认值：execute</p>
 </li>
-<li><p><result> 用于配置结果集<br>—name：用于确定action类中，方法的返回值<br>—text：标签体用于设置jsp路径<br>—type:结果集类型<br>&emsp; — dispatcher：请求转发，从一个action到jsp页面，默认值。<br>&emsp;— redirect：重定向到jsp页面<br>&emsp;— redirectAction：重定向到另一个action<br>&emsp;— stream：以流的方法发送浏览器，用于文件下载。<br>&emsp;— chain：链，在一次请求中，从一个action到另一个action</result></p>
+<li><p>&lt;result&gt; 用于配置结果集<br>—name：用于确定action类中，方法的返回值<br>—text：标签体用于设置jsp路径<br>—type:结果集类型<br>&emsp; — dispatcher：请求转发，从一个action到jsp页面，默认值。<br>&emsp;— redirect：重定向到jsp页面<br>&emsp;— redirectAction：重定向到另一个action<br>&emsp;— stream：以流的方法发送浏览器，用于文件下载。<br>&emsp;— chain：链，在一次请求中，从一个action到另一个action</p>
 </li>
-<li><p><result-types> 用于配置结果集类型的，一般不用，但需要看的懂。</result-types></p>
+<li><p>&lt;result-types&gt;  用于配置结果集类型的，一般不用，但需要看的懂。</p>
 </li>
-<li><p><interceptors> 用于配置拦截器<br>— <interceptor> 用于注册拦截器的<br>—<interceptor-stack> 拦截器栈，将已经注册的拦截器组合在一起，形成一个栈。<br>例如：<interceptor-stack name="defaultStack"> 声明一个拦截器栈，名称是：defaultStack</interceptor-stack></interceptor-stack></interceptor></interceptors></p>
+<li><p>&lt;interceptors&gt;  用于配置拦截器<br>— &lt;interceptor&gt;  用于注册拦截器的<br>—&lt;interceptor-stack&gt;  拦截器栈，将已经注册的拦截器组合在一起，形成一个栈。<br>例如：&lt;interceptor-stack name=”defaultStack”&gt;  声明一个拦截器栈，名称是：defaultStack</p>
 </li>
-<li><p><default-interceptor-ref>用于确定当前默认拦截器的<br>例如：<default-interceptor-ref name="defaultStack"> 将“defaultStack”拦截器栈，声明默认拦截器栈</default-interceptor-ref></default-interceptor-ref></p>
+<li><p>&lt;default-interceptor-ref&gt; 用于确定当前默认拦截器的<br>例如：&lt;default-interceptor-ref name=”defaultStack”/&gt;  将“defaultStack”拦截器栈，声明默认拦截器栈</p>
 </li>
-<li><p><default-action-ref> 如果访问的action不存在，默认执行的aciton。<br>例如：/a/b/c/d/oneAction 此aciton没有配置，默认情况返回action找不到<br>!!!如果配置<default-action-ref> 如果存在404时，不显示action找不到，而是指定action</default-action-ref></default-action-ref></p>
+<li><p>&lt;default-action-ref&gt; 如果访问的action不存在，默认执行的aciton。<br>例如：/a/b/c/d/oneAction 此aciton没有配置，默认情况返回action找不到<br>!!!如果配置&lt;default-action-ref&gt; 如果存在404时，不显示action找不到，而是指定action</p>
 </li>
-<li><p><default-class-ref> 用于配置 默认action实现类<br>例如：<default-class-ref class="com.opensymphony.xwork2.ActionSupport"><br>!!!如果编写配置文件时没有声明class属性，及<action name=""> 将执行ActionSupport类。</action></default-class-ref></default-class-ref></p>
+<li><p>&lt;default-class-ref &gt;  用于配置 默认action实现类<br>例如：&lt;default-class-ref class=”com.opensymphony.xwork2.ActionSupport” /&gt;<br>!!!如果编写配置文件时没有声明class属性，及&lt;action name=””&gt;  将执行ActionSupport类。</p>
 </li>
-<li><p><include> 将多个struts配置文件组合成一个。<br>struts.xml 入口配置文件，大家共用的。用于存放通用模块。<br>&emsp;<include file="struts-user.xml"><br>&emsp;<include file="struts-book.xml"><br>提供子配置文件<br>&emsp;struts-user.xml<br>&emsp;struts-book.xml</include></include></include></p>
+<li><p>&lt;include&gt;  将多个struts配置文件组合成一个。<br>struts.xml 入口配置文件，大家共用的。用于存放通用模块。<br>&emsp;&lt;include file=”struts-user.xml” /&gt;<br>&emsp;&lt;include file=”struts-book.xml” /&gt;<br>提供子配置文件<br>&emsp;struts-user.xml<br>&emsp;struts-book.xml</p>
 </li>
 </ul>
 <h3 id="动态方法调用"><a href="#动态方法调用" class="headerlink" title="动态方法调用"></a>动态方法调用</h3><p><img src="/images/struts2/%E5%8A%A8%E6%80%81%E6%96%B9%E6%B3%95%E8%B0%83%E7%94%A8.png" alt="动态方法调用"></p>

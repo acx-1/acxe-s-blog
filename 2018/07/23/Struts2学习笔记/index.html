@@ -87,14 +87,14 @@
 <meta property="og:site_name" content="Acxer">
 <meta property="og:description" content="知识导入xml解析&amp;emsp;&amp;emsp; dom4j解析 反射&amp;emsp;&amp;emsp; 有完整类名，并且含有空参构造函数，如何创建出对象？ //使用反射创建对象 Class clazz = Class.forName(&amp;quot;xxx&amp;quot;); clazz.newInstance();">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:image" content="http://yoursite.com/2018/07/23/images/struts2/struts-mini%E5%9B%BE%E8%A7%A3.png">
-<meta property="og:image" content="http://yoursite.com/2018/07/23/images/struts2/struts2%E7%9A%84%E6%9E%B6%E6%9E%84.png">
-<meta property="og:image" content="http://yoursite.com/2018/07/23/images/struts2/%E5%8A%A8%E6%80%81%E6%96%B9%E6%B3%95%E8%B0%83%E7%94%A8.png">
-<meta property="og:updated_time" content="2018-07-23T09:54:39.969Z">
+<meta property="og:image" content="http://yoursite.com/images/struts2/struts-mini%E5%9B%BE%E8%A7%A3.png">
+<meta property="og:image" content="http://yoursite.com/images/struts2/struts2%E7%9A%84%E6%9E%B6%E6%9E%84.png">
+<meta property="og:image" content="http://yoursite.com/images/struts2/%E5%8A%A8%E6%80%81%E6%96%B9%E6%B3%95%E8%B0%83%E7%94%A8.png">
+<meta property="og:updated_time" content="2018-07-23T09:59:40.013Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Struts2学习笔记">
 <meta name="twitter:description" content="知识导入xml解析&amp;emsp;&amp;emsp; dom4j解析 反射&amp;emsp;&amp;emsp; 有完整类名，并且含有空参构造函数，如何创建出对象？ //使用反射创建对象 Class clazz = Class.forName(&amp;quot;xxx&amp;quot;); clazz.newInstance();">
-<meta name="twitter:image" content="http://yoursite.com/2018/07/23/images/struts2/struts-mini%E5%9B%BE%E8%A7%A3.png">
+<meta name="twitter:image" content="http://yoursite.com/images/struts2/struts-mini%E5%9B%BE%E8%A7%A3.png">
 
 
 
@@ -365,7 +365,7 @@ clazz.newInstance();
 <h2 id="filter过滤器"><a href="#filter过滤器" class="headerlink" title="filter过滤器"></a>filter过滤器</h2><ul>
 <li>过滤来自浏览器发送的请求.在请求到达访问资源之前.会先经过过滤器.</li>
 <li>可以完成批处理. 还可以根据filterChain来决定是否放行.</li>
-<li>也可以使用请求转发,或重定向,不让请求到目标路径.<h2 id="自己定义一个struts-Mini"><a href="#自己定义一个struts-Mini" class="headerlink" title="自己定义一个struts-Mini"></a>自己定义一个struts-Mini</h2><img src="../images/struts2/struts-mini%E5%9B%BE%E8%A7%A3.png" alt="struts-mini图解"></li>
+<li>也可以使用请求转发,或重定向,不让请求到目标路径.<h2 id="自己定义一个struts-Mini"><a href="#自己定义一个struts-Mini" class="headerlink" title="自己定义一个struts-Mini"></a>自己定义一个struts-Mini</h2><img src="/images/struts2/struts-mini%E5%9B%BE%E8%A7%A3.png" alt="struts-mini图解"></li>
 </ul>
 <h1 id="Struts2"><a href="#Struts2" class="headerlink" title="Struts2"></a>Struts2</h1><h2 id="框架相关"><a href="#框架相关" class="headerlink" title="框架相关"></a>框架相关</h2><ul>
 <li>什么是框架？<br>&emsp; 微观：由一个一个类构成的包，包再构成框架<br>&emsp; 宏观：半成品的项目，我们需要执行什么业务时，为框架填写业务逻辑即可</li>
@@ -425,7 +425,7 @@ clazz.newInstance();
      &lt;/filter-mapping&gt;
  &lt;/web-app&gt;
  //---------------------------
-</code></pre><h2 id="struts2的架构"><a href="#struts2的架构" class="headerlink" title="struts2的架构"></a>struts2的架构</h2><h3 id="struts2的架构图解"><a href="#struts2的架构图解" class="headerlink" title="struts2的架构图解"></a>struts2的架构图解</h3><p><img src="../images/struts2/struts2%E7%9A%84%E6%9E%B6%E6%9E%84.png" alt="struts2的架构"></p>
+</code></pre><h2 id="struts2的架构"><a href="#struts2的架构" class="headerlink" title="struts2的架构"></a>struts2的架构</h2><h3 id="struts2的架构图解"><a href="#struts2的架构图解" class="headerlink" title="struts2的架构图解"></a>struts2的架构图解</h3><p><img src="/images/struts2/struts2%E7%9A%84%E6%9E%B6%E6%9E%84.png" alt="struts2的架构"></p>
 <h3 id="struts2中的6个配置文件"><a href="#struts2中的6个配置文件" class="headerlink" title="struts2中的6个配置文件"></a>struts2中的6个配置文件</h3><ol>
 <li>default.properties ：用于配置struts 常量。例如：编码</li>
 <li>struts-default.xml ：struts提供的默认核心配置文件，struts大部分功能都在此配置文件中。</li>
@@ -437,7 +437,9 @@ clazz.newInstance();
 <ol start="4">
 <li>struts.xml ：用户自定义核心配置文件。<br>&emsp;  struts.xml 可以配置所有内容，包括：常量,如：<br>&emsp;&emsp; <constant name="struts.i18n.encoding" value="GBK"></constant> //配置编码</li>
 <li>struts.properties ： 用于自定义struts常量配置文件。一般不使用。</li>
-<li>web.xml ：也可以配置struts常量<br>@@@注意：如果配置常量，所有的配置文件存在优先级，编号越大优先级越高。<h3 id="常见的struts常量"><a href="#常见的struts常量" class="headerlink" title="常见的struts常量"></a>常见的struts常量</h3></li>
+<li>web.xml ：也可以配置struts常量<br>@@@注意：如果配置常量，所有的配置文件存在优先级，编号越大优先级越高。</li>
+</ol>
+<h3 id="常见的struts常量"><a href="#常见的struts常量" class="headerlink" title="常见的struts常量"></a>常见的struts常量</h3><ol>
 <li>用于配置项目编码//struts.i18n.encoding=UTF-8</li>
 <li>struts整合spring需要配置，默认注释掉了//struts.objectFactory = spring</li>
 <li>struts默认使用文件上传解析工具：apache-commons-fileupload<br>struts.multipart.parser=jakarta</li>
@@ -474,7 +476,7 @@ clazz.newInstance();
 <li><p><include> 将多个struts配置文件组合成一个。<br>struts.xml 入口配置文件，大家共用的。用于存放通用模块。<br>&emsp;<include file="struts-user.xml"><br>&emsp;<include file="struts-book.xml"><br>提供子配置文件<br>&emsp;struts-user.xml<br>&emsp;struts-book.xml</include></include></include></p>
 </li>
 </ul>
-<h3 id="动态方法调用"><a href="#动态方法调用" class="headerlink" title="动态方法调用"></a>动态方法调用</h3><p><img src="../images/struts2/%E5%8A%A8%E6%80%81%E6%96%B9%E6%B3%95%E8%B0%83%E7%94%A8.png" alt="动态方法调用"></p>
+<h3 id="动态方法调用"><a href="#动态方法调用" class="headerlink" title="动态方法调用"></a>动态方法调用</h3><p><img src="/images/struts2/%E5%8A%A8%E6%80%81%E6%96%B9%E6%B3%95%E8%B0%83%E7%94%A8.png" alt="动态方法调用"></p>
 
       
     </div>

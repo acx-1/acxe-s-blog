@@ -1,0 +1,935 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next mist use-motion" lang="zh-Hans">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css" />
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=5.1.4">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=5.1.4" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="Hexo, NexT" />
+
+
+
+
+
+
+
+
+
+
+<meta name="description" content="Mybatis是什么？&amp;emsp;&amp;emsp;    MyBatis 本是apache的一个开源项目iBatis, 2010年这个项目由apache software foundation 迁移到了google code，并且改名为MyBatis，实质上Mybatis对ibatis进行一些改进。&amp;emsp;&amp;emsp;    MyBatis是一个优秀的持久层框架，它对jdbc的操作数据库的过程进行">
+<meta property="og:type" content="article">
+<meta property="og:title" content="mybatis学习笔记">
+<meta property="og:url" content="http://yoursite.com/2018/07/25/mybatis学习笔记/index.html">
+<meta property="og:site_name" content="Acxer">
+<meta property="og:description" content="Mybatis是什么？&amp;emsp;&amp;emsp;    MyBatis 本是apache的一个开源项目iBatis, 2010年这个项目由apache software foundation 迁移到了google code，并且改名为MyBatis，实质上Mybatis对ibatis进行一些改进。&amp;emsp;&amp;emsp;    MyBatis是一个优秀的持久层框架，它对jdbc的操作数据库的过程进行">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:image" content="http://yoursite.com/images/mybatis/mybatis%E6%A1%86%E6%9E%B6%E5%9B%BE.png">
+<meta property="og:image" content="http://yoursite.com/images/mybatis/4.2user%E8%A1%A8%E7%BB%93%E6%9E%84.png">
+<meta property="og:image" content="http://yoursite.com/images/mybatis/4.2mybatis%E6%96%87%E4%BB%B6%E7%BB%93%E6%9E%84.png">
+<meta property="og:image" content="http://yoursite.com/images/mybatis/mybatis%E4%BE%9D%E8%B5%96%E5%8C%85.png">
+<meta property="og:updated_time" content="2018-07-25T15:02:31.732Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="mybatis学习笔记">
+<meta name="twitter:description" content="Mybatis是什么？&amp;emsp;&amp;emsp;    MyBatis 本是apache的一个开源项目iBatis, 2010年这个项目由apache software foundation 迁移到了google code，并且改名为MyBatis，实质上Mybatis对ibatis进行一些改进。&amp;emsp;&amp;emsp;    MyBatis是一个优秀的持久层框架，它对jdbc的操作数据库的过程进行">
+<meta name="twitter:image" content="http://yoursite.com/images/mybatis/mybatis%E6%A1%86%E6%9E%B6%E5%9B%BE.png">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Mist',
+    version: '5.1.4',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://yoursite.com/2018/07/25/mybatis学习笔记/"/>
+
+
+
+
+
+  <title>mybatis学习笔记 | Acxer</title>
+  
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">Acxer</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle">���</p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br />
+            
+            关于
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-sitemap">
+          <a href="/sitemap.xml" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-sitemap"></i> <br />
+            
+            站点地图
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/07/25/mybatis学习笔记/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Acxer">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Acxer">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">mybatis学习笔记</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-07-25T22:06:14+08:00">
+                2018-07-25
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/框架/" itemprop="url" rel="index">
+                    <span itemprop="name">框架</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h1 id="Mybatis是什么？"><a href="#Mybatis是什么？" class="headerlink" title="Mybatis是什么？"></a>Mybatis是什么？</h1><p>&emsp;&emsp;    MyBatis 本是<a href="http://baike.baidu.com/view/28283.htm" target="_blank" rel="noopener">apache</a>的一个开源项目<a href="http://baike.baidu.com/view/628102.htm" target="_blank" rel="noopener">iBatis</a>, 2010年这个项目由apache software foundation 迁移到了google code，并且改名为MyBatis，实质上Mybatis对ibatis进行一些改进。<br>&emsp;&emsp;    MyBatis是一个优秀的持久层框架，它对jdbc的操作数据库的过程进行封装，使开发者只需要关注 SQL 本身，而不需要花费精力去处理例如注册驱动、创建connection、创建statement、手动设置参数、结果集检索等jdbc繁杂的过程代码。<br><a id="more"></a><br>&emsp;&emsp;    Mybatis通过xml或注解的方式将要执行的各种statement（statement、preparedStatemnt、CallableStatement）配置起来，并通过java对象和statement中的sql进行映射生成最终执行的sql语句，最后由mybatis框架执行sql并将结果映射成java对象并返回。</p>
+<h1 id="分析原生态jdbc程序中存在的问题"><a href="#分析原生态jdbc程序中存在的问题" class="headerlink" title="分析原生态jdbc程序中存在的问题"></a>分析原生态jdbc程序中存在的问题</h1><h2 id="原生态Jdbc程序代码"><a href="#原生态Jdbc程序代码" class="headerlink" title="原生态Jdbc程序代码"></a>原生态Jdbc程序代码</h2><pre><code>//原生态Jdbc程序代码
+public static void** main(String[] args) {
+    Connection connection = null;
+    PreparedStatement preparedStatement = null;
+    ResultSet resultSet = **null**;
+    try{
+        //1、加载数据库驱动
+       Class.forName(&quot;com.mysql.jdbc.Driver&quot;);
+        //2、通过驱动管理类获取数据库链接
+       connection =DriverManager._getConnection_(&quot;jdbc:mysql://localhost:3306/mybatis?characterEncoding=utf-8&quot;, &quot;root&quot;, &quot;root&quot;);
+       //3、定义sql语句 ?表示占位符
+       String sql = &quot;select * from user where username = ?&quot;;    
+       //4、获取预处理statement    
+       preparedStatement = connection.prepareStatement(sql);    
+        //5、设置参数，第一个参数为sql语句中参数的序号（从1开始），第二个参数为设置的参数值    
+       preparedStatement.setString(1, &quot;王五&quot;);    
+        //6、向数据库发出sql执行查询，查询出结果集    
+       resultSet = preparedStatement.executeQuery();   
+        //7、遍历查询结果集    
+        while(resultSet.next()){
+                                      System._out_.println(resultSet.getString(&quot;id&quot;)+&quot;&quot;+resultSet.getString(&quot;username&quot;));    
+       }    
+   } catch(Exception e) {    
+         e.printStackTrace();    
+   }finally{    
+        //8、释放资源    
+        if(resultSet!=null){    
+           try{    
+               resultSet.close();    
+            } catch(SQLException e) {   
+                e.printStackTrace();   
+            }  
+         }    
+        if(preparedStatement!=null){    
+          try {    
+             preparedStatement.close();    
+           } catch(SQLException e) {       
+               e.printStackTrace();    
+           }    
+         }    
+        if(connection!=null){    
+            try{    
+               connection.close();    
+             } catch (SQLException e) {    
+                 e.printStackTrace();    
+             }    
+         }    
+   }    
+}
+</code></pre><h2 id="Jdbc问题总结"><a href="#Jdbc问题总结" class="headerlink" title="Jdbc问题总结"></a>Jdbc问题总结</h2><ul>
+<li>数据库连接频繁开启和关闭，会严重影响数据库的性能。</li>
+<li>代码中存在硬编码，分别是数据库部分的硬编码和SQL执行部分的硬编码。</li>
+</ul>
+<h1 id="Mybatis框架原理（核心）"><a href="#Mybatis框架原理（核心）" class="headerlink" title="Mybatis框架原理（核心）"></a>Mybatis框架原理（核心）</h1><h2 id="框架图"><a href="#框架图" class="headerlink" title="框架图"></a>框架图</h2><p><img src="/images/mybatis/mybatis%E6%A1%86%E6%9E%B6%E5%9B%BE.png" alt="mybatis框架图"></p>
+<h2 id="分析结论"><a href="#分析结论" class="headerlink" title="分析结论"></a>分析结论</h2><ol>
+<li>mybatis配置文件，包括Mybatis全局配置文件和Mybatis映射文件，其中全局配置文件配置了数据源、事务等信息；映射文件配置了SQL执行相关的信息。</li>
+<li>mybatis通过读取配置文件信息（全局配置文件和映射文件），构造出SqlSessionFactory，即会话工厂。</li>
+<li>通过SqlSessionFactory，可以创建SqlSession即会话。Mybatis是通过SqlSession来操作数据库的。</li>
+<li>SqlSession本身不能直接操作数据库，它是通过底层的Executor执行器接口来操作数据库的。Executor接口有两个实现类，一个是普通执行器，一个是缓存执行器（默认）。</li>
+<li>Executor执行器要处理的SQL信息是封装到一个底层对象MappedStatement中。该对象包括：SQL语句、输入参数映射信息、输出结果集映射信息。其中输入参数和输出结果的映射类型包括java的简单类型、HashMap集合对象、POJO对象类型。</li>
+</ol>
+<h1 id="Mybatis入门程序"><a href="#Mybatis入门程序" class="headerlink" title="Mybatis入门程序"></a>Mybatis入门程序</h1><p>Mybatis课程的所有代码程序将通过一个订单商品案例来进行讲解。</p>
+<h2 id="需求"><a href="#需求" class="headerlink" title="需求"></a>需求</h2><p>&emsp;&emsp;  对用户信息的增删改查操作。</p>
+<ol>
+<li>根据用户ID来查询用户信息；</li>
+<li>根据用户名称来模糊查询用户信息列表；</li>
+<li>添加用户</li>
+<li>删除用户（练习）</li>
+<li>修改用户（练习）</li>
+</ol>
+<h2 id="环境准备"><a href="#环境准备" class="headerlink" title="环境准备"></a>环境准备</h2><ul>
+<li>Jdk环境：jdk1.7.0_72</li>
+<li>Ide环境：eclipse indigo</li>
+<li>数据库环境：MySQL 5.1</li>
+<li>Mybatis：3.2.7</li>
+</ul>
+<h3 id="数据库初始化"><a href="#数据库初始化" class="headerlink" title="数据库初始化"></a>数据库初始化</h3><h4 id="数据库脚本"><a href="#数据库脚本" class="headerlink" title="数据库脚本"></a>数据库脚本</h4><ol>
+<li>执行sql_table.sql脚本，创建数据库表；</li>
+<li>执行sql_data.sql初始化测试数据。</li>
+</ol>
+<h4 id="数据库表"><a href="#数据库表" class="headerlink" title="数据库表"></a>数据库表</h4><p>订单商品案例的数据库脚本中，总共包含四张表，其中入门程序只使用user表.<br>用户表的表结构如下：<br><img src="/images/mybatis/4.2user%E8%A1%A8%E7%BB%93%E6%9E%84.png" alt="4.2user表结构"></p>
+<h3 id="下载mybatis"><a href="#下载mybatis" class="headerlink" title="下载mybatis"></a>下载mybatis</h3><p>mybaits的代码由github.com管理，下载地址：<a href="https://github.com/mybatis/mybatis-3/releases" target="_blank" rel="noopener">https://github.com/mybatis/mybatis-3/releases</a><br><img src="/images/mybatis/4.2mybatis%E6%96%87%E4%BB%B6%E7%BB%93%E6%9E%84.png" alt="4.2mybatis文件结构"></p>
+<ul>
+<li>Lib：mybatis的依赖包</li>
+<li>Mybatis-3.2.7.jar：mybatis的核心包</li>
+<li>Mybatis-3.2.7.pdf：mybatis的使用指南</li>
+</ul>
+<h2 id="工程搭建（三步）"><a href="#工程搭建（三步）" class="headerlink" title="工程搭建（三步）"></a>工程搭建（三步）</h2><h3 id="第一步：创建java工程"><a href="#第一步：创建java工程" class="headerlink" title="第一步：创建java工程"></a>第一步：创建java工程</h3><p>用eclipse创建一个java工程，jdk使用1.7.0_72。</p>
+<h3 id="第二步：加入jar包"><a href="#第二步：加入jar包" class="headerlink" title="第二步：加入jar包"></a>第二步：加入jar包</h3><p>加入以下四部分jar包，其中junit的jar包，是非必须的。</p>
+<ul>
+<li><p>Mybatis核心包:mybaties-3.2.7.jar</p>
+</li>
+<li><p>Mybatis依赖包<br><img src="/images/mybatis/mybatis%E4%BE%9D%E8%B5%96%E5%8C%85.png" alt="mybatis依赖包"></p>
+</li>
+<li><p>MySQL驱动包: mysql-connector-*</p>
+</li>
+<li><p>Junit单元测试包（单元测试需要的包）:junit-4.9.jar</p>
+</li>
+</ul>
+<h3 id="第三步：添加log4j-properties文件"><a href="#第三步：添加log4j-properties文件" class="headerlink" title="第三步：添加log4j.properties文件"></a>第三步：添加log4j.properties文件</h3><p>Mybatis使用的日志包是log4j的，所以需要添加log4j.properties。<br>在classpath下创建log4j.properties如下：</p>
+<pre><code> //文件内容可以从mybatis-3.2.7.pdf中拷贝
+ # Global logging configuration
+log4j.rootLogger=DEBUG, stdout    
+# Console output...
+log4j.appender.stdout=org.apache.log4j.ConsoleAppender    
+log4j.appender.stdout.layout=org.apache.log4j.PatternLayout    
+log4j.appender.stdout.layout.ConversionPattern=%5p [%t] - %m%n
+</code></pre><ul>
+<li>日志级别在开发阶段设置成DEBUG，在生产阶段设置成INFO或者ERROR。</li>
+</ul>
+<h2 id="编程步骤"><a href="#编程步骤" class="headerlink" title="编程步骤"></a>编程步骤</h2><ol>
+<li>创建PO类，根据需求创建；</li>
+<li>创建全局配置文件SqlMapConfig.xml；</li>
+<li>编写映射文件；</li>
+<li>加载映射文件，在SqlMapConfig.xml中进行加载；</li>
+<li><p>编写测试程序，即编写Java代码，连接并操作数据库。</p>
+<ul>
+<li>思路：</li>
+</ul>
+</li>
+<li>读取配置文件；</li>
+<li>通过SqlSessionFactoryBuilder创建SqlSessionFactory会话工厂。</li>
+<li>通过SqlSessionFactory创建SqlSession。</li>
+<li>调用SqlSession的操作数据库方法。</li>
+<li>关闭SqlSession。</li>
+</ol>
+<h2 id="代码开发"><a href="#代码开发" class="headerlink" title="代码开发"></a>代码开发</h2><h3 id="创建PO类"><a href="#创建PO类" class="headerlink" title="创建PO类"></a>创建PO类</h3><p>&emsp; 创建的po类的属性要和数据库中表的列名一致（如果表中的列名是带有下划线，那么po类中对应的的属性名要采用驼峰式命名）<br>&emsp;User.java类如下：</p>
+<pre><code>//Public class User {
+    private int id;
+    private String username;// 用户姓名
+    private String sex;// 性别
+    private Date birthday;// 生日
+    private String address;// 地址
+get/set……
+</code></pre><h3 id="创建SqlMapConfig-xml配置文件"><a href="#创建SqlMapConfig-xml配置文件" class="headerlink" title="创建SqlMapConfig.xml配置文件"></a>创建SqlMapConfig.xml配置文件</h3><p>&emsp; 在classpath下，创建SqlMapConfig.xml文件</p>
+<pre><code>//SqlMapConfig.xml（文件头可以从mybatis-3.2.7.pdf文档的2.1.2小节中拷贝）：
+&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot; ?&gt;
+&lt;!DOCTYPE configuration
+PUBLIC &quot;-//mybatis.org//DTD Config 3.0//EN&quot;
+&quot;http://mybatis.org/dtd/mybatis-3-config.dtd&quot;&gt;
+&lt;configuration&gt;
+&lt;!-- 配置mybatis的环境信息 --&gt;
+&lt;environments default=&quot;development&quot;&gt;
+    &lt;environment id=&quot;development&quot;&gt;
+        &lt;!-- 配置JDBC事务控制，由mybatis进行管理 --&gt;
+        &lt;transactionManager type=&quot;JDBC&quot;&gt;&lt;/transactionManager&gt;
+        &lt;!-- 配置数据源，采用dbcp连接池 --&gt;
+        &lt;dataSource type=&quot;POOLED&quot;&gt;
+            &lt;property name=&quot;driver&quot; value=&quot;com.mysql.jdbc.Driver&quot;/&gt;
+            &lt;property name=&quot;url&quot; value=&quot;jdbc:mysql://localhost:3306/mybatis?useUnicode=true&amp;amp;characterEncoding=utf8&quot;/&gt;
+            &lt;property name=&quot;username&quot; value=&quot;root&quot;/&gt;
+            &lt;property name=&quot;password&quot; value=&quot;root&quot;/&gt;
+        &lt;/dataSource&gt;
+    &lt;/environment&gt;
+&lt;/environments&gt;
+&lt;/configuration&gt;
+</code></pre><h3 id="需求开发"><a href="#需求开发" class="headerlink" title="需求开发"></a>需求开发</h3><p>&emsp;在classpath下，创建sqlmap文件夹。在sqlmap目录下，创建User.xml映射文件。</p>
+<pre><code>//Mybatis的映射文件头（可以从mybatis-3.2.7.pdf文件中拷贝）：
+&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot; ?&gt;
+&lt;!DOCTYPE mapper    
+PUBLIC &quot;-//mybatis.org//DTD Mapper 3.0//EN&quot;    
+&quot;http://mybatis.org/dtd/mybatis-3-mapper.dtd&quot;&gt;
+</code></pre><h4 id="根据用户ID来查询用户信息"><a href="#根据用户ID来查询用户信息" class="headerlink" title="根据用户ID来查询用户信息"></a>根据用户ID来查询用户信息</h4><h5 id="编写映射文件"><a href="#编写映射文件" class="headerlink" title="编写映射文件"></a>编写映射文件</h5><p>&emsp;在User.xml中添加以下代码：</p>
+<pre><code>//&lt;!-- 
+    namespace：命名空间，它的作用就是对SQL进行分类化管理，可以理解为SQL隔离
+    注意：使用mapper代理开发时，namespace有特殊且重要的作用
+ --&gt;
+&lt;mapper namespace=&quot;test&quot;&gt;    
+    &lt;!-- 根据用户ID，查询用户信息 --&gt;
+    &lt;!-- 
+        [id]：statement的id，要求在命名空间内唯一  
+        [parameterType]：入参的java类型
+        [resultType]：查询出的单条结果集对应的java类型
+        [#{}]： 表示一个占位符?
+        [#{id}]：表示该占位符待接收参数的名称为id。注意：如果参数为简单类型时，#{}里面的参数名称可以是任意定义
+     --&gt;
+    &lt;select id=&quot;findUserById&quot; parameterType=&quot;int&quot; resultType=&quot;cn.itcast.mybatis.po.User&quot;&gt;
+        SELECT * FROM USER WHERE id = #{id}
+    &lt;/select&gt;
+&lt;/mapper&gt;
+</code></pre><h5 id="加载映射文件"><a href="#加载映射文件" class="headerlink" title="加载映射文件"></a>加载映射文件</h5><pre><code>//在SqlMapConfig.xml中，添加以下代码：
+&lt;!-- 加载mapper --&gt;
+&lt;mappers&gt;
+    &lt;mapper resource=&quot;sqlmap/User.xml&quot;/&gt;
+&lt;/mappers&gt;
+</code></pre><h5 id="编写测试程序"><a href="#编写测试程序" class="headerlink" title="编写测试程序"></a>编写测试程序</h5><pre><code>//public class MybatisFirst {        
+        @Test
+        public void findUserByIdTest() throws Exception{                
+            //1、读取配置文件
+            String resource = &quot;SqlMapConfig.xml&quot;;
+            InputStream inputStream = Resources.getResourceAsStream(resource);
+            //2、根据配置文件创建SqlSessionFactory
+            SqlSessionFactory sqlSessionFactory = new SqlSessionFactoryBuilder().build(inputStream);
+            //3、SqlSessionFactory创建SqlSession
+            SqlSession sqlSession = sqlSessionFactory.openSession();
+            //4、SqlSession执行statement，并返回映射结果
+            //第一个参数：statement的id，建议：namespace.statementId（确保唯一）
+            //第二个参数：入参的值，它的类型要和映射文件中对应的statement的入参类型一致
+            User user = sqlSession.selectOne(&quot;findUserById&quot;, 1);                
+            //打印输出结果集
+            System.out.println(user);                
+            //5、关闭SqlSession
+            sqlSession.close();
+        }
+    }
+</code></pre>
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2018/07/23/Struts2学习笔记/" rel="next" title="Struts2学习笔记">
+                <i class="fa fa-chevron-left"></i> Struts2学习笔记
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <p class="site-author-name" itemprop="name">Acxer</p>
+              <p class="site-description motion-element" itemprop="description"></p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives/">
+              
+                  <span class="site-state-item-count">5</span>
+                  <span class="site-state-item-name">日志</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-categories">
+                
+                  <span class="site-state-item-count">2</span>
+                  <span class="site-state-item-name">分类</span>
+                
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                
+                  <span class="site-state-item-count">2</span>
+                  <span class="site-state-item-name">标签</span>
+                
+              </div>
+            
+
+          </nav>
+
+          
+
+          
+
+          
+          
+
+          
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#Mybatis是什么？"><span class="nav-number">1.</span> <span class="nav-text">Mybatis是什么？</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#分析原生态jdbc程序中存在的问题"><span class="nav-number">2.</span> <span class="nav-text">分析原生态jdbc程序中存在的问题</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#原生态Jdbc程序代码"><span class="nav-number">2.1.</span> <span class="nav-text">原生态Jdbc程序代码</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Jdbc问题总结"><span class="nav-number">2.2.</span> <span class="nav-text">Jdbc问题总结</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Mybatis框架原理（核心）"><span class="nav-number">3.</span> <span class="nav-text">Mybatis框架原理（核心）</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#框架图"><span class="nav-number">3.1.</span> <span class="nav-text">框架图</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#分析结论"><span class="nav-number">3.2.</span> <span class="nav-text">分析结论</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Mybatis入门程序"><span class="nav-number">4.</span> <span class="nav-text">Mybatis入门程序</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#需求"><span class="nav-number">4.1.</span> <span class="nav-text">需求</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#环境准备"><span class="nav-number">4.2.</span> <span class="nav-text">环境准备</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#数据库初始化"><span class="nav-number">4.2.1.</span> <span class="nav-text">数据库初始化</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#数据库脚本"><span class="nav-number">4.2.1.1.</span> <span class="nav-text">数据库脚本</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#数据库表"><span class="nav-number">4.2.1.2.</span> <span class="nav-text">数据库表</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#下载mybatis"><span class="nav-number">4.2.2.</span> <span class="nav-text">下载mybatis</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#工程搭建（三步）"><span class="nav-number">4.3.</span> <span class="nav-text">工程搭建（三步）</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#第一步：创建java工程"><span class="nav-number">4.3.1.</span> <span class="nav-text">第一步：创建java工程</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#第二步：加入jar包"><span class="nav-number">4.3.2.</span> <span class="nav-text">第二步：加入jar包</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#第三步：添加log4j-properties文件"><span class="nav-number">4.3.3.</span> <span class="nav-text">第三步：添加log4j.properties文件</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#编程步骤"><span class="nav-number">4.4.</span> <span class="nav-text">编程步骤</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#代码开发"><span class="nav-number">4.5.</span> <span class="nav-text">代码开发</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#创建PO类"><span class="nav-number">4.5.1.</span> <span class="nav-text">创建PO类</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#创建SqlMapConfig-xml配置文件"><span class="nav-number">4.5.2.</span> <span class="nav-text">创建SqlMapConfig.xml配置文件</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#需求开发"><span class="nav-number">4.5.3.</span> <span class="nav-text">需求开发</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#根据用户ID来查询用户信息"><span class="nav-number">4.5.3.1.</span> <span class="nav-text">根据用户ID来查询用户信息</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#编写映射文件"><span class="nav-number">4.5.3.1.1.</span> <span class="nav-text">编写映射文件</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#加载映射文件"><span class="nav-number">4.5.3.1.2.</span> <span class="nav-text">加载映射文件</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#编写测试程序"><span class="nav-number">4.5.3.1.3.</span> <span class="nav-text">编写测试程序</span></a></li></ol></li></ol></li></ol></li></ol></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2018</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Acxer</span>
+
+  
+</div>
+
+
+  <div class="powered-by">由 <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a> 强力驱动</div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">主题 &mdash; <a class="theme-link" target="_blank" href="https://github.com/iissnan/hexo-theme-next">NexT.Mist</a> v5.1.4</div>
+
+
+
+
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>

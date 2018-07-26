@@ -90,7 +90,7 @@
 <meta property="og:image" content="http://yoursite.com/images/mybatis/4.2user%E8%A1%A8%E7%BB%93%E6%9E%84.png">
 <meta property="og:image" content="http://yoursite.com/images/mybatis/4.2mybatis%E6%96%87%E4%BB%B6%E7%BB%93%E6%9E%84.png">
 <meta property="og:image" content="http://yoursite.com/images/mybatis/mybatis%E4%BE%9D%E8%B5%96%E5%8C%85.png">
-<meta property="og:updated_time" content="2018-07-25T15:02:31.732Z">
+<meta property="og:updated_time" content="2018-07-26T09:56:36.299Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="mybatis学习笔记">
 <meta name="twitter:description" content="Mybatis是什么？&amp;emsp;&amp;emsp;    MyBatis 本是apache的一个开源项目iBatis, 2010年这个项目由apache software foundation 迁移到了google code，并且改名为MyBatis，实质上Mybatis对ibatis进行一些改进。&amp;emsp;&amp;emsp;    MyBatis是一个优秀的持久层框架，它对jdbc的操作数据库的过程进行">
@@ -562,6 +562,163 @@ PUBLIC &quot;-//mybatis.org//DTD Mapper 3.0//EN&quot;
             sqlSession.close();
         }
     }
+</code></pre><h4 id="根据用户名称来模糊查询用户信息列表"><a href="#根据用户名称来模糊查询用户信息列表" class="headerlink" title="根据用户名称来模糊查询用户信息列表"></a>根据用户名称来模糊查询用户信息列表</h4><h5 id="编写映射文件-1"><a href="#编写映射文件-1" class="headerlink" title="编写映射文件"></a>编写映射文件</h5><pre><code>//在User.xml中，添加以下内容
+&lt;!-- 根据用户名称模糊查询用户信息列表 --&gt;
+&lt;!-- 
+    [${}]：表示拼接SQL字符串
+    [${value}]：表示要拼接的是简单类型参数。
+    注意：
+      1、如果参数为简单类型时，${}里面的参数名称必须为value 
+      2、${}会引起SQL注入，一般情况下不推荐使用。但是有些场景必须使用${}，比如order by ${colname}
+--&gt;
+&lt;select id=&quot;findUsersByName&quot; parameterType=&quot;String&quot; resultType=&quot;cn.itcast.mybatis.po.User&quot;&gt;
+    SELECT * FROM USER WHERE username LIKE &apos;%${value}%&apos;
+&lt;/select&gt;
+</code></pre><h5 id="加载映射文件-1"><a href="#加载映射文件-1" class="headerlink" title="加载映射文件"></a>加载映射文件</h5><pre><code>//已配置，此处无需再次配置
+</code></pre><h5 id="编写测试程序-1"><a href="#编写测试程序-1" class="headerlink" title="编写测试程序"></a>编写测试程序</h5><pre><code>//@Test
+public void findUsersByNameTest() throws Exception {
+    // 1、读取配置文件
+    String resource = &quot;SqlMapConfig.xml&quot;;
+    InputStream inputStream = Resources.getResourceAsStream(resource);
+    // 2、根据配置文件创建SqlSessionFactory
+    SqlSessionFactory sqlSessionFactory = new SqlSessionFactoryBuilder().build(inputStream);
+    // 3、SqlSessionFactory创建SqlSession
+    SqlSession sqlSession = sqlSessionFactory.openSession();
+    // 4、SqlSession执行statement，并返回映射结果
+    // 第一个参数：statement的id，建议：namespace.statementId（确保唯一）
+    // 第二个参数：入参的值，它的类型要和映射文件中对应的statement的入参类型一致
+    List&lt;User&gt; users = sqlSession.selectList(&quot;test.findUsersByName&quot;, &quot;小明&quot;);
+
+    // 打印输出结果集
+    System.out.println(users);
+
+    // 5、关闭SqlSession
+    sqlSession.close();
+}
+</code></pre><h4 id="添加用户"><a href="#添加用户" class="headerlink" title="添加用户"></a>添加用户</h4><h5 id="编写映射文件-2"><a href="#编写映射文件-2" class="headerlink" title="编写映射文件"></a>编写映射文件</h5><pre><code>//&lt;!-- 添加用户 --&gt;
+&lt;!-- 如果主键的值是通过MySQL自增机制生成的，那么我们此处不需要再显示的给ID赋值 --&gt;
+&lt;insert id=&quot;insertUser&quot; parameterType=&quot;cn.itcast.mybatis.po.User&quot;&gt;
+    INSERT INTO USER(username,sex,birthday,address) VALUES (#{username},#{sex},#{birthday},#{address})
+&lt;/insert&gt;
+</code></pre><h5 id="加载映射文件-2"><a href="#加载映射文件-2" class="headerlink" title="加载映射文件"></a>加载映射文件</h5><pre><code>//已配置，此处无需再次配置
+</code></pre><h5 id="编写测试程序-2"><a href="#编写测试程序-2" class="headerlink" title="编写测试程序"></a>编写测试程序</h5><pre><code>//注意：增删改操作要对SqlSession执行commit操作。
+@Test
+    public void insertUserTest() throws Exception {
+        // 1、读取配置文件
+        String resource = &quot;SqlMapConfig.xml&quot;;
+        InputStream inputStream = Resources.getResourceAsStream(resource);
+        // 2、根据配置文件创建SqlSessionFactory
+        SqlSessionFactory sqlSessionFactory = new SqlSessionFactoryBuilder()
+                .build(inputStream);
+        // 3、SqlSessionFactory创建SqlSession
+        SqlSession sqlSession = sqlSessionFactory.openSession();
+        // 4、SqlSession执行statement，并返回映射结果
+        //构建user参数，没有赋值的属性采取默认值
+        User user = new User();
+        user.setUsername(&quot;东哥1&quot;);
+        user.setAddress(&quot;清河宝盛西里&quot;);
+        // 第一个参数：statement的id，建议：namespace.statementId（确保唯一）
+        // 第二个参数：入参的值，它的类型要和映射文件中对应的statement的入参类型一致
+        sqlSession.insert(&quot;insertUser&quot;, user);
+        //切记：增删改操作时，要执行commit操作
+        sqlSession.commit();
+        // 5、关闭SqlSession
+        sqlSession.close();
+    }
+</code></pre><h5 id="主键返回之MySQL自增主键"><a href="#主键返回之MySQL自增主键" class="headerlink" title="主键返回之MySQL自增主键"></a>主键返回之MySQL自增主键</h5><p>思路：</p>
+<ul>
+<li>MySQL自增主键，是指在insert之前MySQL会自动生成一个自增的主键。</li>
+<li>我们可以通过MySQL的函数获取到刚插入的自增主键:LAST_INSERT_ID()</li>
+<li><p>这个函数是在insert语句之后去调用。</p>
+<p>  //修改映射文件：</p>
+  <!-- 添加用户之自增主键返回（selectKey方式） -->
+  <!-- 
+          [selectKey标签]：通过select查询来生成主键
+          [keyProperty]：指定存放生成主键的属性
+          [resultType]：生成主键所对应的Java类型
+          [order]：指定该查询主键SQL语句的执行顺序，相对于insert语句
+          [last_insert_id]：MySQL的函数，要配合insert语句一起使用
+  -->
+  <insert id="insertUser" parametertype="cn.itcast.mybatis.po.User"><br>      <selectkey keyproperty="id" resulttype="int" order="AFTER"><br>          SELECT LAST_INSERT_ID()<br>      </selectkey><br>      INSERT INTO USER(username,sex,birthday,address) VALUES (#{username},#{sex},#{birthday},#{address})<br>  </insert>
+
+</li>
+</ul>
+<h5 id="主键返回之MySQL函数UUID"><a href="#主键返回之MySQL函数UUID" class="headerlink" title="主键返回之MySQL函数UUID"></a>主键返回之MySQL函数UUID</h5><pre><code>// 注意：使用mysql的uuid()函数生成主键，需要修改表中id字段类型为string，长度设置成35位。
+&lt;!-- 添加用户之UUID主键返回 --&gt;
+&lt;!-- 
+    [uuid]：MySQL的函数，生成的主键是35位的字符串，所以使用它时要修改id的类型为字符类型
+    注意：
+        1、此时order采用BEFORE，因为需要先生成出主键，再执行insert语句
+        2、显式的给ID赋值
+--&gt;
+&lt;insert id=&quot;insertUser&quot; parameterType=&quot;cn.itcast.mybatis.po.User&quot;&gt;
+    &lt;selectKey keyProperty=&quot;id&quot; resultType=&quot;string&quot; order=&quot;BEFORE&quot;&gt;
+        SELECT UUID()
+    &lt;/selectKey&gt;
+    INSERT INTO USER(id,username,sex,birthday,address) VALUES (#{id},#{username},#{sex},#{birthday},#{address})
+&lt;/insert&gt;
+</code></pre><h5 id="主键返回之Oracle序列返回"><a href="#主键返回之Oracle序列返回" class="headerlink" title="主键返回之Oracle序列返回"></a>主键返回之Oracle序列返回</h5><pre><code>//&lt;!-- 添加用户之sequence返回 --&gt;
+&lt;!-- 
+    通过Oracle的sequence获取主键方式与MySQL的uuid方式基本一致    
+--&gt;
+&lt;insert id=&quot;insertUser&quot; parameterType=&quot;cn.itcast.mybatis.po.User&quot;&gt;
+    &lt;selectKey keyProperty=&quot;id&quot; resultType=&quot;int&quot; order=&quot;BEFORE&quot;&gt;
+        SELECT user_seq.nextval() FROM dual
+    &lt;/selectKey&gt;
+    INSERT INTO USER(id,username,sex,birthday,address) VALUES (#{id},#{username},#{sex},#{birthday},#{address})
+&lt;/insert&gt;
+</code></pre><h4 id="删除用户"><a href="#删除用户" class="headerlink" title="删除用户"></a>删除用户</h4><h5 id="编写映射文件-3"><a href="#编写映射文件-3" class="headerlink" title="编写映射文件"></a>编写映射文件</h5><pre><code>//&lt;!-- 根据ID删除用户 --&gt;
+&lt;delete id=&quot;deleteUser&quot; parameterType=&quot;int&quot;&gt;
+    DELETE FROM USER WHERE id= #{id}
+&lt;/delete&gt;
+</code></pre><h5 id="加载映射文件-3"><a href="#加载映射文件-3" class="headerlink" title="加载映射文件"></a>加载映射文件</h5><pre><code>//已配置，此处无需再次配置。
+</code></pre><h5 id="编写测试程序-3"><a href="#编写测试程序-3" class="headerlink" title="编写测试程序"></a>编写测试程序</h5><pre><code>//@Test
+public void deleteUserTest() throws Exception{
+    // 1、读取配置文件
+    String resource = &quot;SqlMapConfig.xml&quot;;
+    InputStream inputStream = Resources.getResourceAsStream(resource);
+    // 2、根据配置文件创建SqlSessionFactory
+    SqlSessionFactory sqlSessionFactory = new SqlSessionFactoryBuilder()
+                .build(inputStream);
+    // 3、SqlSessionFactory创建SqlSession
+    SqlSession sqlSession = sqlSessionFactory.openSession();
+    // 4、SqlSession执行statement，并返回映射结果
+    // 第一个参数：statement的id，建议：namespace.statementId（确保唯一）
+    // 第二个参数：入参的值，它的类型要和映射文件中对应的statement的入参类型一致
+    sqlSession.delete(&quot;test.deleteUser&quot;, 30);            
+    //切记：增删改操作时，要执行commit操作
+    sqlSession.commit();   
+    // 5、关闭SqlSession
+    sqlSession.close();
+}
+</code></pre><h4 id="修改用户"><a href="#修改用户" class="headerlink" title="修改用户"></a>修改用户</h4><h5 id="编写映射文件-4"><a href="#编写映射文件-4" class="headerlink" title="编写映射文件"></a>编写映射文件</h5><pre><code>//&lt;!-- 根据传入的用户信息修改用户 --&gt;
+&lt;update id=&quot;updateUser&quot; parameterType=&quot;cn.itcast.mybatis.po.User&quot;&gt;
+    UPDATE USER SET username = #{username},sex=#{sex} WHERE id=#{id}
+&lt;/update&gt;
+</code></pre><h5 id="加载映射文件-4"><a href="#加载映射文件-4" class="headerlink" title="加载映射文件"></a>加载映射文件</h5><pre><code>//已配置，此处无需再次配置。
+</code></pre><h5 id="编写测试程序-4"><a href="#编写测试程序-4" class="headerlink" title="编写测试程序"></a>编写测试程序</h5><pre><code>//@Test
+public void updateUserTest() throws Exception{
+    // 1、读取配置文件
+    String resource = &quot;SqlMapConfig.xml&quot;;
+    InputStream inputStream = Resources.getResourceAsStream(resource);
+    // 2、根据配置文件创建SqlSessionFactory
+    SqlSessionFactory sqlSessionFactory = new SqlSessionFactoryBuilder().build(inputStream);
+    // 3、SqlSessionFactory创建SqlSession
+    SqlSession sqlSession = sqlSessionFactory.openSession();
+    // 4、SqlSession执行statement，并返回映射结果           
+    //构建user参数，没有赋值的属性采取默认值
+    User user = new User();
+    user.setId(28);
+    user.setUsername(&quot;东哥11&quot;);
+    user.setAddress(&quot;清河宝盛西里&quot;);            
+    // 第一个参数：statement的id，建议：namespace.statementId（确保唯一）
+    // 第二个参数：入参的值，它的类型要和映射文件中对应的statement的入参类型一致
+    sqlSession.update(&quot;test.updateUser&quot;, user);            
+    //切记：增删改操作时，要执行commit操作
+    sqlSession.commit();    
+    // 5、关闭SqlSession
+    sqlSession.close();
+}
 </code></pre>
       
     </div>
@@ -726,7 +883,7 @@ PUBLIC &quot;-//mybatis.org//DTD Mapper 3.0//EN&quot;
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#Mybatis是什么？"><span class="nav-number">1.</span> <span class="nav-text">Mybatis是什么？</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#分析原生态jdbc程序中存在的问题"><span class="nav-number">2.</span> <span class="nav-text">分析原生态jdbc程序中存在的问题</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#原生态Jdbc程序代码"><span class="nav-number">2.1.</span> <span class="nav-text">原生态Jdbc程序代码</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Jdbc问题总结"><span class="nav-number">2.2.</span> <span class="nav-text">Jdbc问题总结</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Mybatis框架原理（核心）"><span class="nav-number">3.</span> <span class="nav-text">Mybatis框架原理（核心）</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#框架图"><span class="nav-number">3.1.</span> <span class="nav-text">框架图</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#分析结论"><span class="nav-number">3.2.</span> <span class="nav-text">分析结论</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Mybatis入门程序"><span class="nav-number">4.</span> <span class="nav-text">Mybatis入门程序</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#需求"><span class="nav-number">4.1.</span> <span class="nav-text">需求</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#环境准备"><span class="nav-number">4.2.</span> <span class="nav-text">环境准备</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#数据库初始化"><span class="nav-number">4.2.1.</span> <span class="nav-text">数据库初始化</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#数据库脚本"><span class="nav-number">4.2.1.1.</span> <span class="nav-text">数据库脚本</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#数据库表"><span class="nav-number">4.2.1.2.</span> <span class="nav-text">数据库表</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#下载mybatis"><span class="nav-number">4.2.2.</span> <span class="nav-text">下载mybatis</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#工程搭建（三步）"><span class="nav-number">4.3.</span> <span class="nav-text">工程搭建（三步）</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#第一步：创建java工程"><span class="nav-number">4.3.1.</span> <span class="nav-text">第一步：创建java工程</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#第二步：加入jar包"><span class="nav-number">4.3.2.</span> <span class="nav-text">第二步：加入jar包</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#第三步：添加log4j-properties文件"><span class="nav-number">4.3.3.</span> <span class="nav-text">第三步：添加log4j.properties文件</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#编程步骤"><span class="nav-number">4.4.</span> <span class="nav-text">编程步骤</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#代码开发"><span class="nav-number">4.5.</span> <span class="nav-text">代码开发</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#创建PO类"><span class="nav-number">4.5.1.</span> <span class="nav-text">创建PO类</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#创建SqlMapConfig-xml配置文件"><span class="nav-number">4.5.2.</span> <span class="nav-text">创建SqlMapConfig.xml配置文件</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#需求开发"><span class="nav-number">4.5.3.</span> <span class="nav-text">需求开发</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#根据用户ID来查询用户信息"><span class="nav-number">4.5.3.1.</span> <span class="nav-text">根据用户ID来查询用户信息</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#编写映射文件"><span class="nav-number">4.5.3.1.1.</span> <span class="nav-text">编写映射文件</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#加载映射文件"><span class="nav-number">4.5.3.1.2.</span> <span class="nav-text">加载映射文件</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#编写测试程序"><span class="nav-number">4.5.3.1.3.</span> <span class="nav-text">编写测试程序</span></a></li></ol></li></ol></li></ol></li></ol></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#Mybatis是什么？"><span class="nav-number">1.</span> <span class="nav-text">Mybatis是什么？</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#分析原生态jdbc程序中存在的问题"><span class="nav-number">2.</span> <span class="nav-text">分析原生态jdbc程序中存在的问题</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#原生态Jdbc程序代码"><span class="nav-number">2.1.</span> <span class="nav-text">原生态Jdbc程序代码</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Jdbc问题总结"><span class="nav-number">2.2.</span> <span class="nav-text">Jdbc问题总结</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Mybatis框架原理（核心）"><span class="nav-number">3.</span> <span class="nav-text">Mybatis框架原理（核心）</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#框架图"><span class="nav-number">3.1.</span> <span class="nav-text">框架图</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#分析结论"><span class="nav-number">3.2.</span> <span class="nav-text">分析结论</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Mybatis入门程序"><span class="nav-number">4.</span> <span class="nav-text">Mybatis入门程序</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#需求"><span class="nav-number">4.1.</span> <span class="nav-text">需求</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#环境准备"><span class="nav-number">4.2.</span> <span class="nav-text">环境准备</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#数据库初始化"><span class="nav-number">4.2.1.</span> <span class="nav-text">数据库初始化</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#数据库脚本"><span class="nav-number">4.2.1.1.</span> <span class="nav-text">数据库脚本</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#数据库表"><span class="nav-number">4.2.1.2.</span> <span class="nav-text">数据库表</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#下载mybatis"><span class="nav-number">4.2.2.</span> <span class="nav-text">下载mybatis</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#工程搭建（三步）"><span class="nav-number">4.3.</span> <span class="nav-text">工程搭建（三步）</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#第一步：创建java工程"><span class="nav-number">4.3.1.</span> <span class="nav-text">第一步：创建java工程</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#第二步：加入jar包"><span class="nav-number">4.3.2.</span> <span class="nav-text">第二步：加入jar包</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#第三步：添加log4j-properties文件"><span class="nav-number">4.3.3.</span> <span class="nav-text">第三步：添加log4j.properties文件</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#编程步骤"><span class="nav-number">4.4.</span> <span class="nav-text">编程步骤</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#代码开发"><span class="nav-number">4.5.</span> <span class="nav-text">代码开发</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#创建PO类"><span class="nav-number">4.5.1.</span> <span class="nav-text">创建PO类</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#创建SqlMapConfig-xml配置文件"><span class="nav-number">4.5.2.</span> <span class="nav-text">创建SqlMapConfig.xml配置文件</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#需求开发"><span class="nav-number">4.5.3.</span> <span class="nav-text">需求开发</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#根据用户ID来查询用户信息"><span class="nav-number">4.5.3.1.</span> <span class="nav-text">根据用户ID来查询用户信息</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#编写映射文件"><span class="nav-number">4.5.3.1.1.</span> <span class="nav-text">编写映射文件</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#加载映射文件"><span class="nav-number">4.5.3.1.2.</span> <span class="nav-text">加载映射文件</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#编写测试程序"><span class="nav-number">4.5.3.1.3.</span> <span class="nav-text">编写测试程序</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#根据用户名称来模糊查询用户信息列表"><span class="nav-number">4.5.3.2.</span> <span class="nav-text">根据用户名称来模糊查询用户信息列表</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#编写映射文件-1"><span class="nav-number">4.5.3.2.1.</span> <span class="nav-text">编写映射文件</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#加载映射文件-1"><span class="nav-number">4.5.3.2.2.</span> <span class="nav-text">加载映射文件</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#编写测试程序-1"><span class="nav-number">4.5.3.2.3.</span> <span class="nav-text">编写测试程序</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#添加用户"><span class="nav-number">4.5.3.3.</span> <span class="nav-text">添加用户</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#编写映射文件-2"><span class="nav-number">4.5.3.3.1.</span> <span class="nav-text">编写映射文件</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#加载映射文件-2"><span class="nav-number">4.5.3.3.2.</span> <span class="nav-text">加载映射文件</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#编写测试程序-2"><span class="nav-number">4.5.3.3.3.</span> <span class="nav-text">编写测试程序</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#主键返回之MySQL自增主键"><span class="nav-number">4.5.3.3.4.</span> <span class="nav-text">主键返回之MySQL自增主键</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#主键返回之MySQL函数UUID"><span class="nav-number">4.5.3.3.5.</span> <span class="nav-text">主键返回之MySQL函数UUID</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#主键返回之Oracle序列返回"><span class="nav-number">4.5.3.3.6.</span> <span class="nav-text">主键返回之Oracle序列返回</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#删除用户"><span class="nav-number">4.5.3.4.</span> <span class="nav-text">删除用户</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#编写映射文件-3"><span class="nav-number">4.5.3.4.1.</span> <span class="nav-text">编写映射文件</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#加载映射文件-3"><span class="nav-number">4.5.3.4.2.</span> <span class="nav-text">加载映射文件</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#编写测试程序-3"><span class="nav-number">4.5.3.4.3.</span> <span class="nav-text">编写测试程序</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#修改用户"><span class="nav-number">4.5.3.5.</span> <span class="nav-text">修改用户</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#编写映射文件-4"><span class="nav-number">4.5.3.5.1.</span> <span class="nav-text">编写映射文件</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#加载映射文件-4"><span class="nav-number">4.5.3.5.2.</span> <span class="nav-text">加载映射文件</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#编写测试程序-4"><span class="nav-number">4.5.3.5.3.</span> <span class="nav-text">编写测试程序</span></a></li></ol></li></ol></li></ol></li></ol></li></ol></div>
             
 
           </div>

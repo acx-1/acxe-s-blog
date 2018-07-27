@@ -120,7 +120,7 @@
 <meta property="og:image" content="http://yoursite.com/images/mybatis/12.4.png">
 <meta property="og:image" content="http://yoursite.com/images/mybatis/12.5.png">
 <meta property="og:image" content="http://yoursite.com/images/mybatis/12.6.png">
-<meta property="og:updated_time" content="2018-07-27T14:53:18.950Z">
+<meta property="og:updated_time" content="2018-07-27T15:03:13.699Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="mybatis学习笔记">
 <meta name="twitter:description" content="Tips：本笔记的内容主要来自传智播客mybatis学习视频的相关资料，以及一些实操后的补充。如有内容或排版方面的错误，欢迎纠正~篇幅较长，建议结合目录阅读  Mybatis是什么？&amp;emsp;&amp;emsp;    MyBatis 本是apache的一个开源项目iBatis, 2010年这个项目由apache software foundation 迁移到了google code，并且改名为MyB">
@@ -1853,9 +1853,11 @@ public List&lt;User&gt; findUserAndItemsRstMap();
 </li>
 </ul>
 <p><strong>总结：</strong><br>&emsp;&emsp;使用resultMap是针对那些对查询结果映射有特殊要求的功能，，比如特殊要求映射成list中包括 多个list。</p>
-<h2 id="高级映射总结"><a href="#高级映射总结" class="headerlink" title="高级映射总结"></a>高级映射总结</h2><p>*resultType：<br>&emsp;&emsp;作用：<br>&emsp;&emsp;&emsp;&emsp;将查询结果按照sql列名pojo属性名一致性映射到pojo中。<br>&emsp;&emsp;场合：<br>&emsp;&emsp;&emsp;&emsp;常见一些明细记录的展示，比如用户购买商品明细，将关联查询信息全部展示在页面时，此时可直接使用resultType将每一条记录映射到pojo中，在前端页面遍历list（list中是pojo）即可。</p>
-<ul>
-<li>resultMap：<br>&emsp;&emsp;使用association和collection完成一对一和一对多高级映射（对结果有特殊的映射要求）。</li>
+<h2 id="高级映射总结"><a href="#高级映射总结" class="headerlink" title="高级映射总结"></a>高级映射总结</h2><ul>
+<li><p>resultType：<br>&emsp;&emsp;作用：<br>&emsp;&emsp;&emsp;&emsp;将查询结果按照sql列名pojo属性名一致性映射到pojo中。<br>&emsp;&emsp;场合：<br>&emsp;&emsp;&emsp;&emsp;常见一些明细记录的展示，比如用户购买商品明细，将关联查询信息全部展示在页面时，此时可直接使用resultType将每一条记录映射到pojo中，在前端页面遍历list（list中是pojo）即可。</p>
+</li>
+<li><p>resultMap：<br>&emsp;&emsp;使用association和collection完成一对一和一对多高级映射（对结果有特殊的映射要求）。</p>
+</li>
 <li><ul>
 <li>association：<br>&emsp;&emsp;作用：<br>&emsp;&emsp;&emsp;&emsp;  将关联查询信息映射到一个pojo对象中。<br>&emsp;&emsp;场合：<br>&emsp;&emsp;&emsp;&emsp;为了方便查询关联信息可以使用association将关联订单信息映射为用户对象的pojo属性中，比如：查询订单及关联用户信息。</li>
 </ul>
@@ -1899,32 +1901,34 @@ public List&lt;User&gt; findUserAndItemsRstMap();
 <h2 id="使用association进行延迟加载"><a href="#使用association进行延迟加载" class="headerlink" title="使用association进行延迟加载"></a>使用association进行延迟加载</h2><h3 id="需求-11"><a href="#需求-11" class="headerlink" title="需求"></a>需求</h3><p>&emsp;&emsp;查询订单并且关联查询用户信息（对用户信息的加载要求是按需加载）</p>
 <h3 id="编写映射文件-9"><a href="#编写映射文件-9" class="headerlink" title="编写映射文件"></a>编写映射文件</h3><p>&emsp;&emsp;需要定义两个mapper的方法对应的statement。</p>
 <ol>
-<li><p>只查询订单信息<br><code>SELECT * FROM orders</code><br>&emsp;&emsp;在查询订单的statement中使用association去延迟加载（执行）下边的satatement(关联查询用户信息)</p>
-<p> //<!-- 定义OrdersUserLazyLoadingRstMap --><br> <resultmap type="cn.itcast.mybatis.po.Orders" id="OrdersUserLazyLoadingRstMap"></resultmap></p>
-<pre><code>&lt;id column=&quot;id&quot; property=&quot;id&quot; /&gt;
-&lt;result column=&quot;user_id&quot; property=&quot;userId&quot; /&gt;
-&lt;result column=&quot;number&quot; property=&quot;number&quot; /&gt;
-&lt;result column=&quot;createtime&quot; property=&quot;createtime&quot; /&gt;
-&lt;result column=&quot;note&quot; property=&quot;note&quot; /&gt;            
-&lt;!-- 延迟加载用户信息 --&gt;
-&lt;!-- select：指定延迟加载需要执行的statement的id（是根据user_id查询用户信息的statement）
-    我们使用UserMapper.xml中的findUserById完成根据用户ID（user_id）查询用户信息
-    如果findUserById不在本mapper中，前边需要加namespace
---&gt;
-&lt;!-- column：主信息表中需要关联查询的列，此处是user_id --&gt;
-&lt;association property=&quot;user&quot; select=&quot;cn.itcast.mybatis.mapper.UserMapper.findUserById&quot; column=&quot;user_id&quot;&gt;&lt;/association&gt;
-</code></pre><p>     </p>
- <!-- 查询订单信息，延迟加载关联查询的用户信息 -->
- <select id="findOrdersUserLazyLoading" resultmap="OrdersUserLazyLoadingRstMap"><br>     SELECT * FROM orders<br> </select>
-
-
-</li>
+<li>只查询订单信息</li>
+<li><code>SELECT * FROM orders</code></li>
 </ol>
-<ol start="2">
-<li><p>关联查询用户信息<br>&emsp;&emsp;通过上边查询到的订单信息中user_id去关联查询用户信息,使用UserMapper.xml中的findUserById</p>
-<p> //&lt;select id=”findUserById” parameterType=”int”</p>
-<pre><code>    resultType=&quot;cn.itcast.mybatis.po.User&quot;&gt;
-SELECT * FROM user WHERE id = #{id}
+<p>&emsp;&emsp;在查询订单的statement中使用association去延迟加载（执行）下边的satatement(关联查询用户信息)</p>
+<pre><code>//&lt;!-- 定义OrdersUserLazyLoadingRstMap --&gt;
+    &lt;resultMap type=&quot;cn.itcast.mybatis.po.Orders&quot; id=&quot;OrdersUserLazyLoadingRstMap&quot;&gt;       
+         &lt;id column=&quot;id&quot; property=&quot;id&quot; /&gt;
+          &lt;result column=&quot;user_id&quot; property=&quot;userId&quot; /&gt;
+          &lt;result column=&quot;number&quot; property=&quot;number&quot; /&gt;
+          &lt;result column=&quot;createtime&quot; property=&quot;createtime&quot; /&gt;
+          &lt;result column=&quot;note&quot; property=&quot;note&quot; /&gt;            
+          &lt;!-- 延迟加载用户信息 --&gt;
+          &lt;!-- select：指定延迟加载需要执行的statement的id（是根据user_id查询用户信息的statement）
+          我们使用UserMapper.xml中的findUserById完成根据用户ID（user_id）查询用户信息
+          如果findUserById不在本mapper中，前边需要加namespace
+          --&gt;
+          &lt;!-- column：主信息表中需要关联查询的列，此处是user_id --&gt;
+          &lt;association property=&quot;user&quot; select=&quot;cn.itcast.mybatis.mapper.UserMapper.findUserById&quot; column=&quot;user_id&quot;&gt;&lt;/association&gt;
+      &lt;/resultMap&gt;    
+      &lt;!-- 查询订单信息，延迟加载关联查询的用户信息 --&gt;
+      &lt;select id=&quot;findOrdersUserLazyLoading&quot; resultMap=&quot;OrdersUserLazyLoadingRstMap&quot;&gt;
+          SELECT * FROM orders
+      &lt;/select&gt;
+</code></pre><ol start="2">
+<li><p>关联查询用户信息</p>
+<p>&emsp;&emsp;通过上边查询到的订单信息中user_id去关联查询用户信息,使用UserMapper.xml中的findUserById</p>
+<p> //<select id="findUserById" parametertype="int" resulttype="cn.itcast.mybatis.po.User"></select></p>
+<pre><code>SELECT * FROM user WHERE id = #{id}
 </code></pre><p> </p>
 </li>
 </ol>
@@ -1961,8 +1965,7 @@ sqlSession.close();
 </ol>
 <p><strong>实现思路：</strong></p>
 <p>先去查询第一个mapper方法，获取订单信息列表<br>在程序中（service），按需去调用第二个mapper方法去查询用户信息。</p>
-<p><strong>总之：</strong></p>
-<p>&emsp;&emsp;使用延迟加载方法，先去查询简单的sql（最好单表，也可以关联查询），再去按需要加载关联查询的其它信息。</p>
+<p><strong>总之：</strong><br>&emsp;&emsp;使用延迟加载方法，先去查询简单的sql（最好单表，也可以关联查询），再去按需要加载关联查询的其它信息。</p>
 <h1 id="查询缓存"><a href="#查询缓存" class="headerlink" title="查询缓存"></a>查询缓存</h1><h2 id="mybatis缓存分析"><a href="#mybatis缓存分析" class="headerlink" title="mybatis缓存分析"></a>mybatis缓存分析</h2><p>&emsp;&emsp;mybatis提供查询缓存，如果缓存中有数据就不用从数据库中获取，用于减轻数据压力，提高系统性能。<br><img src="/images/mybatis/11.1.png" alt="11.1"><br>&emsp;&emsp;一级缓存是SqlSession级别的缓存。在操作数据库时需要构造 sqlSession对象，在对象中有一个数据结构（HashMap）用于存储缓存数据。不同的sqlSession之间的缓存数据区域（HashMap）是互相不影响的。<br>&emsp;&emsp;二级缓存是mapper级别的缓存，多个SqlSession去操作同一个Mapper的sql语句，多个SqlSession可以共用二级缓存，二级缓存是跨SqlSession的。</p>
 <h2 id="一级缓存"><a href="#一级缓存" class="headerlink" title="一级缓存"></a>一级缓存</h2><h3 id="原理"><a href="#原理" class="headerlink" title="原理"></a>原理</h3><p><img src="/images/mybatis/11.2.png" alt="11.2"></p>
 <p>&emsp;&emsp;第一次发起查询用户id为1的用户信息，先去找缓存中是否有id为1的用户信息，如果没有，从数据库查询用户信息。<br>&emsp;&emsp;得到用户信息，将用户信息存储到一级缓存中。<br>&emsp;&emsp;如果sqlSession去执行commit操作（执行插入、更新、删除），清空SqlSession中的一级缓存，这样做的目的为了让缓存中存储的是最新的信息，避免脏读。<br>&emsp;&emsp;第二次发起查询用户id为1的用户信息，先去找缓存中是否有id为1的用户信息，缓存中有，直接从缓存中获取用户信息。</p>

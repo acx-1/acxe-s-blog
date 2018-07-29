@@ -121,7 +121,7 @@
 <meta property="og:image" content="http://yoursite.com/images/mybatis/12.4.png">
 <meta property="og:image" content="http://yoursite.com/images/mybatis/12.5.png">
 <meta property="og:image" content="http://yoursite.com/images/mybatis/12.6.png">
-<meta property="og:updated_time" content="2018-07-28T03:14:46.498Z">
+<meta property="og:updated_time" content="2018-07-29T08:00:46.207Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="mybatis学习笔记">
 <meta name="twitter:description" content="Tips：本笔记的内容主要来自传智播客mybatis学习视频的相关资料，以及一些实操后的补充。如有内容或排版方面的错误，欢迎纠正~篇幅较长，建议结合目录阅读  Mybatis是什么？&amp;emsp;&amp;emsp;    MyBatis 本是apache的一个开源项目iBatis, 2010年这个项目由apache software foundation 迁移到了google code，并且改名为MyB">
@@ -405,7 +405,7 @@
                   <span class="post-meta-item-text">字数统计&#58;</span>
                 
                 <span title="字数统计">
-                  18,861 
+                  19,047 
                 </span>
               
 
@@ -705,20 +705,9 @@ public void findUsersByNameTest() throws Exception {
 <ul>
 <li>MySQL自增主键，是指在insert之前MySQL会自动生成一个自增的主键。</li>
 <li>我们可以通过MySQL的函数获取到刚插入的自增主键:LAST_INSERT_ID()</li>
-<li><p>这个函数是在insert语句之后去调用。</p>
-<p>  //修改映射文件：</p>
-  <!-- 添加用户之自增主键返回（selectKey方式） -->
-  <!-- 
-      [selectKey标签]：通过select查询来生成主键
-      [keyProperty]：指定存放生成主键的属性
-      [resultType]：生成主键所对应的Java类型
-      [order]：指定该查询主键SQL语句的执行顺序，相对于insert语句
-      [last_insert_id]：MySQL的函数，要配合insert语句一起使用
-  -->
-  <insert id="insertUser" parametertype="cn.itcast.mybatis.po.User"><br>      <selectkey keyproperty="id" resulttype="int" order="AFTER"><br>          SELECT LAST_INSERT_ID()<br>      </selectkey><br>      INSERT INTO USER(username,sex,birthday,address) VALUES (#{username},#{sex},#{birthday},#{address})<br>  </insert> 
-
-</li>
+<li>这个函数是在insert语句之后去调用。</li>
 </ul>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">//修改映射文件：</span><br><span class="line"><span class="comment">&lt;!-- 添加用户之自增主键返回（selectKey方式） --&gt;</span></span><br><span class="line"><span class="comment">&lt;!-- </span></span><br><span class="line"><span class="comment">	[selectKey标签]：通过select查询来生成主键</span></span><br><span class="line"><span class="comment">	[keyProperty]：指定存放生成主键的属性</span></span><br><span class="line"><span class="comment">	[resultType]：生成主键所对应的Java类型</span></span><br><span class="line"><span class="comment">	[order]：指定该查询主键SQL语句的执行顺序，相对于insert语句</span></span><br><span class="line"><span class="comment">	[last_insert_id]：MySQL的函数，要配合insert语句一起使用</span></span><br><span class="line"><span class="comment">--&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">insert</span> <span class="attr">id</span>=<span class="string">"insertUser"</span> <span class="attr">parameterType</span>=<span class="string">"cn.itcast.mybatis.po.User"</span>&gt;</span></span><br><span class="line">	<span class="tag">&lt;<span class="name">selectKey</span> <span class="attr">keyProperty</span>=<span class="string">"id"</span> <span class="attr">resultType</span>=<span class="string">"int"</span> <span class="attr">order</span>=<span class="string">"AFTER"</span>&gt;</span></span><br><span class="line">		SELECT LAST_INSERT_ID()</span><br><span class="line">	<span class="tag">&lt;/<span class="name">selectKey</span>&gt;</span></span><br><span class="line">	INSERT INTO USER(username,sex,birthday,address) VALUES (#&#123;username&#125;,#&#123;sex&#125;,#&#123;birthday&#125;,#&#123;address&#125;)</span><br><span class="line"><span class="tag">&lt;/<span class="name">insert</span>&gt;</span></span><br></pre></td></tr></table></figure>
 <h5 id="主键返回之MySQL函数UUID"><a href="#主键返回之MySQL函数UUID" class="headerlink" title="主键返回之MySQL函数UUID"></a>主键返回之MySQL函数UUID</h5><pre><code>// 注意：使用mysql的uuid()函数生成主键，需要修改表中id字段类型为string，长度设置成35位。
 &lt;!-- 添加用户之UUID主键返回 --&gt;
 &lt;!-- 
@@ -854,36 +843,9 @@ public void updateUserTest() throws Exception{
 <p>&emsp;&emsp;SqlSession是一个面向用户（程序员）的接口，它的默认实现是DefaultSqlSession。<br>&emsp;&emsp;Mybatis是通过SqlSession来操作数据库的。SqlSession中不仅包含要处理的SQL信息，还包括一些数据信息，所以说它是线程不安全的，因此它最佳的生命周期范围是在方法体之内。</p>
 <h5 id="Dao实现类代码"><a href="#Dao实现类代码" class="headerlink" title="Dao实现类代码"></a>Dao实现类代码</h5><ul>
 <li>需要向dao实现类中注入SqlSessionFactory，在方法体内通过SqlSessionFactory创建SqlSession</li>
-<li><p>要注意SqlSession和SqlSessionFactory的生命周期。</p>
-<p>  //public class UserDaoImpl implements UserDao {    </p>
-<pre><code>//注入SqlSessionFactory
-private SqlSessionFactory sqlSessionFactory;
-//使用构造方法来初始化SqlSessionFactory
-public UserDaoImpl(SqlSessionFactory sqlSessionFactory){
-    this.sqlSessionFactory = sqlSessionFactory;
-}        
-@Override
-public User findUserById(int id) {
-    //通过工厂，在方法内部获取SqlSession，这样就可以避免线程不安全
-    SqlSession sqlSession = sqlSessionFactory.openSession();
-    //返回结果集
-    return sqlSession.selectOne(&quot;test.findUserById&quot;, id);
-}    
-@Override
-public List&lt;User&gt; findUsersByName(String username) {
-    //通过工厂，在方法内部获取SqlSession，这样就可以避免线程不安全
-    SqlSession sqlSession = sqlSessionFactory.openSession();
-    return sqlSession.selectList(&quot;test.findUsersByName&quot;, username);
-}    
-@Override
-public void insertUser(User user) {
-    //通过工厂，在方法内部获取SqlSession，这样就可以避免线程不安全
-    SqlSession sqlSession = sqlSessionFactory.openSession();
-    sqlSession.insert(&quot;test.insertUser&quot;, user);
-}    
-}          
-</code></pre></li>
+<li>要注意SqlSession和SqlSessionFactory的生命周期。</li>
 </ul>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><span class="line">   <span class="comment">//public class UserDaoImpl implements UserDao &#123;    </span></span><br><span class="line"><span class="comment">//注入SqlSessionFactory</span></span><br><span class="line"><span class="keyword">private</span> SqlSessionFactory sqlSessionFactory;</span><br><span class="line"><span class="comment">//使用构造方法来初始化SqlSessionFactory</span></span><br><span class="line"><span class="function"><span class="keyword">public</span> <span class="title">UserDaoImpl</span><span class="params">(SqlSessionFactory sqlSessionFactory)</span></span>&#123;</span><br><span class="line">	<span class="keyword">this</span>.sqlSessionFactory = sqlSessionFactory;</span><br><span class="line">&#125;    	</span><br><span class="line"><span class="meta">@Override</span></span><br><span class="line"><span class="function"><span class="keyword">public</span> User <span class="title">findUserById</span><span class="params">(<span class="keyword">int</span> id)</span> </span>&#123;</span><br><span class="line">	<span class="comment">//通过工厂，在方法内部获取SqlSession，这样就可以避免线程不安全</span></span><br><span class="line">	SqlSession sqlSession = sqlSessionFactory.openSession();</span><br><span class="line">	<span class="comment">//返回结果集</span></span><br><span class="line">	<span class="keyword">return</span> sqlSession.selectOne(<span class="string">"test.findUserById"</span>, id);</span><br><span class="line">&#125;    </span><br><span class="line"><span class="meta">@Override</span></span><br><span class="line"><span class="function"><span class="keyword">public</span> List&lt;User&gt; <span class="title">findUsersByName</span><span class="params">(String username)</span> </span>&#123;</span><br><span class="line">	<span class="comment">//通过工厂，在方法内部获取SqlSession，这样就可以避免线程不安全</span></span><br><span class="line">	SqlSession sqlSession = sqlSessionFactory.openSession();</span><br><span class="line">	<span class="keyword">return</span> sqlSession.selectList(<span class="string">"test.findUsersByName"</span>, username);</span><br><span class="line">&#125;    </span><br><span class="line"><span class="meta">@Override</span></span><br><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">insertUser</span><span class="params">(User user)</span> </span>&#123;</span><br><span class="line">	<span class="comment">//通过工厂，在方法内部获取SqlSession，这样就可以避免线程不安全</span></span><br><span class="line">	SqlSession sqlSession = sqlSessionFactory.openSession();</span><br><span class="line">	sqlSession.insert(<span class="string">"test.insertUser"</span>, user);</span><br><span class="line">&#125;    </span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 <h5 id="编写测试代码"><a href="#编写测试代码" class="headerlink" title="编写测试代码"></a>编写测试代码</h5><pre><code>//public class UserDaoTest {
     //声明全局的SqlSessionFactory
     private SqlSessionFactory sqlSessionFactory;        
@@ -1326,14 +1288,13 @@ public void testFindUsersCount() {
 &lt;/select&gt;
 </code></pre><h5 id="Mapper接口-1"><a href="#Mapper接口-1" class="headerlink" title="Mapper接口"></a>Mapper接口</h5><p>&emsp;&emsp;下面看下mapper接口的不同之处</p>
 <ol>
-<li><p>输出单个pojo对象</p>
-<pre><code>//根据用户名称来模糊查询用户信息  
-</code></pre><p>   public User findUsersByName(String username);</p>
-</li>
-<li><p>输出pojo列表</p>
-<p> //根据用户名称来模糊查询用户信息列表<br>   public List<user> findUsersByName(String username);</user></p>
-</li>
+<li>输出单个pojo对象</li>
 </ol>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">   <span class="comment">//根据用户名称来模糊查询用户信息  </span></span><br><span class="line"><span class="function"><span class="keyword">public</span> User <span class="title">findUsersByName</span><span class="params">(String username)</span></span>;</span><br></pre></td></tr></table></figure>
+<ol start="2">
+<li>输出pojo列表</li>
+</ol>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//根据用户名称来模糊查询用户信息列表    </span></span><br><span class="line">  <span class="function"><span class="keyword">public</span> List&lt;User&gt; <span class="title">findUsersByName</span><span class="params">(String username)</span></span>;</span><br></pre></td></tr></table></figure>
 <ul>
 <li>总结：同样的mapper映射文件，返回单个对象和对象列表时，mapper接口在生成动态代理的时候，会根据返回值的类型，决定调用selectOne方法还是selectList方法。</li>
 </ul>
@@ -1946,8 +1907,8 @@ public List&lt;User&gt; findUserAndItemsRstMap();
 <h3 id="编写映射文件-9"><a href="#编写映射文件-9" class="headerlink" title="编写映射文件"></a>编写映射文件</h3><p>&emsp;&emsp;需要定义两个mapper的方法对应的statement。</p>
 <ol>
 <li>只查询订单信息</li>
-<li><code>SELECT * FROM orders</code></li>
 </ol>
+<p><code>SELECT * FROM orders</code></p>
 <p>&emsp;&emsp;在查询订单的statement中使用association去延迟加载（执行）下边的satatement(关联查询用户信息)</p>
 <pre><code>//&lt;!-- 定义OrdersUserLazyLoadingRstMap --&gt;
     &lt;resultMap type=&quot;cn.itcast.mybatis.po.Orders&quot; id=&quot;OrdersUserLazyLoadingRstMap&quot;&gt;       
@@ -1971,11 +1932,9 @@ public List&lt;User&gt; findUserAndItemsRstMap();
 </code></pre><ol start="2">
 <li><p>关联查询用户信息</p>
 <p>&emsp;&emsp;通过上边查询到的订单信息中user_id去关联查询用户信息,使用UserMapper.xml中的findUserById</p>
-<p> //<select id="findUserById" parametertype="int" resulttype="cn.itcast.mybatis.po.User"></select></p>
-<pre><code>SELECT * FROM user WHERE id = #{id}
-</code></pre><p> </p>
 </li>
 </ol>
+<figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//&lt;select id="findUserById" parameterType="int" resultType="cn.itcast.mybatis.po.User"&gt;</span></span><br><span class="line">	SELECT * FROM user WHERE id = #&#123;id&#125;</span><br><span class="line">&lt;/select&gt;</span><br></pre></td></tr></table></figure>
 <p>&emsp;&emsp;&emsp;&emsp;上边先去执行findOrdersUserLazyLoading，当需要去查询用户的时候再去执行findUserById，通过resultMap的定义将延迟加载执行配置起来。</p>
 <h3 id="加载映射文件-6"><a href="#加载映射文件-6" class="headerlink" title="加载映射文件"></a>加载映射文件</h3><pre><code>//&lt;!-- 批量加载mapper文件，需要mapper接口文件和mapper映射文件名称相同且在同一个包下 --&gt;   
 &lt;package name=_&quot;cn.itcast.mybatis.mapper&quot;_/&gt;
@@ -1985,22 +1944,9 @@ public List&lt;Orders&gt; findOrdersUserLazyLoading();
 <ol>
 <li>执行上边mapper方法（findOrdersUserLazyLoading），内部去调用cn.itcast.mybatis.mapper.OrdersMapper中的findOrdersUserLazyLoading只查询orders信息（单表）。</li>
 <li>在程序中去遍历上一步骤查询出的List<orders>，当我们调用Orders中的getUser方法时，开始进行延迟加载。</orders></li>
-<li><p>执行延迟加载，去调用UserMapper.xml中findUserbyId这个方法获取用户信息。</p>
-<p> //@Test<br> public void testFindOrdersUserLazyLoading() {</p>
-<pre><code>// 创建sqlSession
-SqlSession sqlSession = sqlSessionFactory.openSession();    
-// 通过SqlSession构造usermapper的代理对象
-OrdersMapper ordersMapper = sqlSession.getMapper(OrdersMapper.class);
-// 调用usermapper的方法
-List&lt;Orders&gt; list = ordersMapper.findOrdersUserLazyLoading();    
-for(Orders orders : list){
-    System.out.println(orders.getUser());
-}
-// 释放SqlSession
-sqlSession.close();
-</code></pre><p> }</p>
-</li>
+<li>执行延迟加载，去调用UserMapper.xml中findUserbyId这个方法获取用户信息。</li>
 </ol>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//@Test</span></span><br><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">testFindOrdersUserLazyLoading</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    <span class="comment">// 创建sqlSession</span></span><br><span class="line">	SqlSession sqlSession = sqlSessionFactory.openSession();    </span><br><span class="line">	<span class="comment">// 通过SqlSession构造usermapper的代理对象</span></span><br><span class="line">	OrdersMapper ordersMapper = sqlSession.getMapper(OrdersMapper.class);</span><br><span class="line">	<span class="comment">// 调用usermapper的方法</span></span><br><span class="line">	List&lt;Orders&gt; list = ordersMapper.findOrdersUserLazyLoading();    </span><br><span class="line">	<span class="keyword">for</span>(Orders orders : list)&#123;</span><br><span class="line">		System.out.println(orders.getUser());</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="comment">// 释放SqlSession</span></span><br><span class="line">	sqlSession.close();</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 <h2 id="延迟加载思考"><a href="#延迟加载思考" class="headerlink" title="延迟加载思考"></a>延迟加载思考</h2><p>&emsp;&emsp;不使用mybatis提供的association及collection中的延迟加载功能，如何实现延迟加载？？</p>
 <p>&emsp;&emsp;实现方法如下：<br>&emsp;&emsp;//定义两个mapper方法：</p>
 <ol>
@@ -2131,13 +2077,9 @@ sqlSession.close();
 </code></pre><h3 id="刷新二级缓存"><a href="#刷新二级缓存" class="headerlink" title="刷新二级缓存"></a>刷新二级缓存</h3><p>&emsp;&emsp;该statement中设置flushCache=true可以刷新当前的二级缓存，默认情况下如果是select语句，那么flushCache是false。如果是insert、update、delete语句，那么flushCache是true。</p>
 <ul>
 <li>如果查询语句设置成true，那么每次查询都是去数据库查询，即意味着该查询的二级缓存失效。</li>
-<li><p>如果查询语句设置成false，即使用二级缓存，那么如果在数据库中修改了数据，而缓存数据还是原来的，这个时候就会出现脏读。<br>&emsp;flushCache设置如下：</p>
-<p>  //&lt;select id=”findUserById” parameterType=”int”</p>
-<pre><code>resultType=&quot;cn.itcast.mybatis.po.User&quot; useCache=&quot;true&quot; flushCache=&quot;true&quot;&gt;
-SELECT * FROM user WHERE id = #{id}
-</code></pre><p>  </p>
-</li>
+<li>如果查询语句设置成false，即使用二级缓存，那么如果在数据库中修改了数据，而缓存数据还是原来的，这个时候就会出现脏读。<br>&emsp;flushCache设置如下：</li>
 </ul>
+<figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//&lt;select id="findUserById" parameterType="int"</span></span><br><span class="line">		resultType=<span class="string">"cn.itcast.mybatis.po.User"</span> useCache=<span class="string">"true"</span> flushCache=<span class="string">"true"</span>&gt;</span><br><span class="line">		SELECT * FROM user WHERE id = #&#123;id&#125;</span><br><span class="line">&lt;/select&gt;</span><br></pre></td></tr></table></figure>
 <h3 id="整合ehcache（了解）"><a href="#整合ehcache（了解）" class="headerlink" title="整合ehcache（了解）"></a>整合ehcache（了解）</h3><p>&emsp;&emsp;Ehcache是一个分布式缓存。</p>
 <h4 id="分布式缓存"><a href="#分布式缓存" class="headerlink" title="分布式缓存"></a>分布式缓存</h4><p>&emsp;&emsp;系统为了提高性能，通常会对系统采用分布式部署（集群部署方式）<br><img src="/images/mybatis/11.9.png" alt="11.9"></p>
 <p>&emsp;&emsp;不使用分布式缓存，缓存的数据在各个服务单独存储，不方便开发。所以要使用分布式缓存对缓存数据进行集中式管理。<br>&emsp;&emsp;Mybatis自身无法实现分布式缓存，需要和其它分布式缓存框架进行整合。</p>
@@ -2676,7 +2618,7 @@ public class UserDaoImpl extends SqlSessionDaoSupport implements UserDao {
     
       <span class="post-meta-item-text">Site words total count&#58;</span>
     
-    <span title="Site words total count">20.9k</span>
+    <span title="Site words total count">21.1k</span>
   
 </div>
 <!--

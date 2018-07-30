@@ -87,7 +87,7 @@
 
 <meta property="og:type" content="website">
 <meta property="og:title" content="Acxer">
-<meta property="og:url" content="http://yoursite.com/index.html">
+<meta property="og:url" content="https://www.acxer.cn/index.html">
 <meta property="og:site_name" content="Acxer">
 <meta property="og:locale" content="zh-Hans">
 <meta name="twitter:card" content="summary">
@@ -121,7 +121,7 @@
 
 
 
-  <link rel="canonical" href="http://yoursite.com/"/>
+  <link rel="canonical" href="https://www.acxer.cn/"/>
 
 
 
@@ -289,7 +289,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/07/30/Spring学习笔记/">
+    <link itemprop="mainEntityOfPage" href="https://www.acxer.cn/2018/07/30/Spring学习笔记/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="Acxer">
@@ -331,6 +331,28 @@
           </span>
 
           
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/框架/" itemprop="url" rel="index">
+                    <span itemprop="name">框架</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
 
           
             
@@ -352,7 +374,7 @@
                   <span class="post-meta-item-text">字数统计&#58;</span>
                 
                 <span title="字数统计">
-                  0 
+                  386 
                 </span>
               
 
@@ -379,7 +401,42 @@
       
         
           
-            
+            <blockquote>
+<p>Tips:本笔记主要信息来源为传智播客的《<a href="https://www.bilibili.com/video/av14839030/" target="_blank" rel="noopener">60集精通java教程Spring框架开发</a>》,笔记内容为：学习资料 + 个人补充；如有内容或排版方面的错误，欢迎纠正~</p>
+</blockquote>
+<hr>
+<p><strong> 内容分布</strong></p>
+<ol>
+<li>spring概念和ioc入门（ioc操作xml配置文件）</li>
+<li>spring的ioc操作（注解）和aop概念</li>
+<li>jdbcTemplate和spring管理事务</li>
+<li>ssh框架整合<a href="qqqqq">开发</a></li>
+</ol>
+<hr>
+<h1 id="Spring概念与IOC入门"><a href="#Spring概念与IOC入门" class="headerlink" title="Spring概念与IOC入门"></a>Spring概念与IOC入门</h1><h2 id="Spring概念"><a href="#Spring概念" class="headerlink" title="Spring概念"></a>Spring概念</h2><ol>
+<li><p>Spring是开源的轻量级框架</p>
+</li>
+<li><p>Spring的核心包括两个部分<br>&emsp;&emsp;-aop：面向切面编程，扩展功能不是修改源代码实现<br>&emsp;&emsp;-ioc：控制反转<br>&emsp;&emsp;&emsp;&emsp;- 比如有一个类，在类里面有方法（不是静态的方法），调用类里面的方法，创建类的对象，使用对象调用方法，创建类对象的过程，需要new出来对象。在这里，对象的创建不是通过new方式实现，而是交给spring配置创建类对象</p>
+</li>
+<li><p>spring是一站式框架<br>&emsp;&emsp;spring在javaee三层结构中，每一层都提供不同的解决技术<br>&emsp;&emsp;&emsp;&emsp;- web层：springMVC<br>&emsp;&emsp;&emsp;&emsp;- service层：spring的ioc<br>&emsp;&emsp;&emsp;&emsp;- dao层：spring的jdbcTemplate</p>
+</li>
+<li><p>Spring的版本<br>&emsp;&emsp;-hibernate：5.x<br>&emsp;&emsp;-Spring4.x（这里学习的版本）</p>
+</li>
+</ol>
+<h2 id="Spring的ioc操作"><a href="#Spring的ioc操作" class="headerlink" title="Spring的ioc操作"></a>Spring的ioc操作</h2><ol>
+<li>把对象的创建交给spring进行管理</li>
+<li>ioc操作两部分：<br>1）ioc的配置文件方式<br>2）ioc的注解方式</li>
+</ol>
+<h3 id="IOC底层原理"><a href="#IOC底层原理" class="headerlink" title="IOC底层原理"></a>IOC底层原理</h3><ol>
+<li><p>ioc底层原理使用技术<br>（1）xml配置文件<br>（2）dom4j解决xml<br>（3）工厂设计模式<br>（4）反射</p>
+</li>
+<li><p>画图分析ioc实现原理</p>
+</li>
+</ol>
+<p><img src="/images/Spring/1.1.png" alt="1.1"><br><img src="/images/Spring/1.2.png" alt="1.2"></p>
+<p>#To be continue…</p>
+<hr>
+
           
         
       
@@ -427,7 +484,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/07/25/mybatis学习笔记/">
+    <link itemprop="mainEntityOfPage" href="https://www.acxer.cn/2018/07/25/mybatis学习笔记/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="Acxer">
@@ -595,7 +652,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/07/23/Struts2学习笔记/">
+    <link itemprop="mainEntityOfPage" href="https://www.acxer.cn/2018/07/23/Struts2学习笔记/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="Acxer">
@@ -765,7 +822,7 @@ clazz.newInstance();
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/07/23/Hinernate学习笔记/">
+    <link itemprop="mainEntityOfPage" href="https://www.acxer.cn/2018/07/23/Hinernate学习笔记/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="Acxer">
@@ -931,7 +988,7 @@ clazz.newInstance();
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/07/22/artical-title/">
+    <link itemprop="mainEntityOfPage" href="https://www.acxer.cn/2018/07/22/artical-title/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="Acxer">
@@ -1096,7 +1153,7 @@ clazz.newInstance();
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/07/22/hello-world/">
+    <link itemprop="mainEntityOfPage" href="https://www.acxer.cn/2018/07/22/hello-world/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="Acxer">
@@ -1302,7 +1359,7 @@ clazz.newInstance();
               
               <div class="site-state-item site-state-tags">
                 
-                  <span class="site-state-item-count">3</span>
+                  <span class="site-state-item-count">6</span>
                   <span class="site-state-item-name">标签</span>
                 
               </div>
@@ -1381,7 +1438,7 @@ clazz.newInstance();
     
       <span class="post-meta-item-text">Site words total count&#58;</span>
     
-    <span title="Site words total count">21.1k</span>
+    <span title="Site words total count">21.5k</span>
   
 </div>
 <!--

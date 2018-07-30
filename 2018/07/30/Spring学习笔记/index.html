@@ -74,7 +74,7 @@
 
 
 
-  <meta name="keywords" content="Hexo, NexT" />
+  <meta name="keywords" content="Spring,ssh,ssm," />
 
 
 
@@ -85,14 +85,21 @@
 
 
 
+<meta name="description" content="Tips:本笔记主要信息来源为传智播客的《60集精通java教程Spring框架开发》,笔记内容为：学习资料 + 个人补充；如有内容或排版方面的错误，欢迎纠正~    内容分布  spring概念和ioc入门（ioc操作xml配置文件） spring的ioc操作（注解）和aop概念 jdbcTemplate和spring管理事务 ssh框架整合开发   Spring概念与IOC入门Spring概">
+<meta name="keywords" content="Spring,ssh,ssm">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Spring学习笔记">
-<meta property="og:url" content="http://yoursite.com/2018/07/30/Spring学习笔记/index.html">
+<meta property="og:url" content="https://www.acxer.cn/2018/07/30/Spring学习笔记/index.html">
 <meta property="og:site_name" content="Acxer">
+<meta property="og:description" content="Tips:本笔记主要信息来源为传智播客的《60集精通java教程Spring框架开发》,笔记内容为：学习资料 + 个人补充；如有内容或排版方面的错误，欢迎纠正~    内容分布  spring概念和ioc入门（ioc操作xml配置文件） spring的ioc操作（注解）和aop概念 jdbcTemplate和spring管理事务 ssh框架整合开发   Spring概念与IOC入门Spring概">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2018-07-30T00:38:43.862Z">
+<meta property="og:image" content="https://www.acxer.cn/images/Spring/1.1.png">
+<meta property="og:image" content="https://www.acxer.cn/images/Spring/1.2.png">
+<meta property="og:updated_time" content="2018-07-30T03:37:24.699Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Spring学习笔记">
+<meta name="twitter:description" content="Tips:本笔记主要信息来源为传智播客的《60集精通java教程Spring框架开发》,笔记内容为：学习资料 + 个人补充；如有内容或排版方面的错误，欢迎纠正~    内容分布  spring概念和ioc入门（ioc操作xml配置文件） spring的ioc操作（注解）和aop概念 jdbcTemplate和spring管理事务 ssh框架整合开发   Spring概念与IOC入门Spring概">
+<meta name="twitter:image" content="https://www.acxer.cn/images/Spring/1.1.png">
 
 
 
@@ -122,7 +129,7 @@
 
 
 
-  <link rel="canonical" href="http://yoursite.com/2018/07/30/Spring学习笔记/"/>
+  <link rel="canonical" href="https://www.acxer.cn/2018/07/30/Spring学习笔记/"/>
 
 
 
@@ -289,7 +296,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/07/30/Spring学习笔记/">
+    <link itemprop="mainEntityOfPage" href="https://www.acxer.cn/2018/07/30/Spring学习笔记/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="Acxer">
@@ -329,6 +336,28 @@
           </span>
 
           
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/框架/" itemprop="url" rel="index">
+                    <span itemprop="name">框架</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
 
           
             
@@ -350,7 +379,7 @@
                   <span class="post-meta-item-text">字数统计&#58;</span>
                 
                 <span title="字数统计">
-                  0 
+                  386 
                 </span>
               
 
@@ -375,7 +404,42 @@
       
 
       
-        
+        <blockquote>
+<p>Tips:本笔记主要信息来源为传智播客的《<a href="https://www.bilibili.com/video/av14839030/" target="_blank" rel="noopener">60集精通java教程Spring框架开发</a>》,笔记内容为：学习资料 + 个人补充；如有内容或排版方面的错误，欢迎纠正~</p>
+</blockquote>
+<hr>
+<p><strong> 内容分布</strong></p>
+<ol>
+<li>spring概念和ioc入门（ioc操作xml配置文件）</li>
+<li>spring的ioc操作（注解）和aop概念</li>
+<li>jdbcTemplate和spring管理事务</li>
+<li>ssh框架整合<a href="qqqqq">开发</a></li>
+</ol>
+<hr>
+<h1 id="Spring概念与IOC入门"><a href="#Spring概念与IOC入门" class="headerlink" title="Spring概念与IOC入门"></a>Spring概念与IOC入门</h1><h2 id="Spring概念"><a href="#Spring概念" class="headerlink" title="Spring概念"></a>Spring概念</h2><ol>
+<li><p>Spring是开源的轻量级框架</p>
+</li>
+<li><p>Spring的核心包括两个部分<br>&emsp;&emsp;-aop：面向切面编程，扩展功能不是修改源代码实现<br>&emsp;&emsp;-ioc：控制反转<br>&emsp;&emsp;&emsp;&emsp;- 比如有一个类，在类里面有方法（不是静态的方法），调用类里面的方法，创建类的对象，使用对象调用方法，创建类对象的过程，需要new出来对象。在这里，对象的创建不是通过new方式实现，而是交给spring配置创建类对象</p>
+</li>
+<li><p>spring是一站式框架<br>&emsp;&emsp;spring在javaee三层结构中，每一层都提供不同的解决技术<br>&emsp;&emsp;&emsp;&emsp;- web层：springMVC<br>&emsp;&emsp;&emsp;&emsp;- service层：spring的ioc<br>&emsp;&emsp;&emsp;&emsp;- dao层：spring的jdbcTemplate</p>
+</li>
+<li><p>Spring的版本<br>&emsp;&emsp;-hibernate：5.x<br>&emsp;&emsp;-Spring4.x（这里学习的版本）</p>
+</li>
+</ol>
+<h2 id="Spring的ioc操作"><a href="#Spring的ioc操作" class="headerlink" title="Spring的ioc操作"></a>Spring的ioc操作</h2><ol>
+<li>把对象的创建交给spring进行管理</li>
+<li>ioc操作两部分：<br>1）ioc的配置文件方式<br>2）ioc的注解方式</li>
+</ol>
+<h3 id="IOC底层原理"><a href="#IOC底层原理" class="headerlink" title="IOC底层原理"></a>IOC底层原理</h3><ol>
+<li><p>ioc底层原理使用技术<br>（1）xml配置文件<br>（2）dom4j解决xml<br>（3）工厂设计模式<br>（4）反射</p>
+</li>
+<li><p>画图分析ioc实现原理</p>
+</li>
+</ol>
+<p><img src="/images/Spring/1.1.png" alt="1.1"><br><img src="/images/Spring/1.2.png" alt="1.2"></p>
+<p>#To be continue…</p>
+<hr>
+
       
     </div>
     
@@ -413,6 +477,16 @@
     
 
     <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/Spring/" rel="tag"># Spring</a>
+          
+            <a href="/tags/ssh/" rel="tag"># ssh</a>
+          
+            <a href="/tags/ssm/" rel="tag"># ssm</a>
+          
+        </div>
       
 
       
@@ -483,8 +557,17 @@
       
 
       
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
 
-      <section class="site-overview-wrap sidebar-panel sidebar-panel-active">
+      <section class="site-overview-wrap sidebar-panel">
         <div class="site-overview">
           <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
             
@@ -525,7 +608,7 @@
               
               <div class="site-state-item site-state-tags">
                 
-                  <span class="site-state-item-count">3</span>
+                  <span class="site-state-item-count">6</span>
                   <span class="site-state-item-name">标签</span>
                 
               </div>
@@ -577,6 +660,22 @@
       </section>
 
       
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#Spring概念与IOC入门"><span class="nav-number">1.</span> <span class="nav-text">Spring概念与IOC入门</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#Spring概念"><span class="nav-number">1.1.</span> <span class="nav-text">Spring概念</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Spring的ioc操作"><span class="nav-number">1.2.</span> <span class="nav-text">Spring的ioc操作</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#IOC底层原理"><span class="nav-number">1.2.1.</span> <span class="nav-text">IOC底层原理</span></a></li></ol></li></ol></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
 
       
 
@@ -604,7 +703,7 @@
     
       <span class="post-meta-item-text">Site words total count&#58;</span>
     
-    <span title="Site words total count">21.1k</span>
+    <span title="Site words total count">21.5k</span>
   
 </div>
 <!--

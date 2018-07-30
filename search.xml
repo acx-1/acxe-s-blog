@@ -3,7 +3,15 @@
   <entry>
     <title><![CDATA[Spring学习笔记]]></title>
     <url>%2F2018%2F07%2F30%2FSpring%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%2F</url>
-    <content type="text"></content>
+    <content type="text"><![CDATA[Tips:本笔记主要信息来源为传智播客的《60集精通java教程Spring框架开发》,笔记内容为：学习资料 + 个人补充；如有内容或排版方面的错误，欢迎纠正~ 内容分布 spring概念和ioc入门（ioc操作xml配置文件） spring的ioc操作（注解）和aop概念 jdbcTemplate和spring管理事务 ssh框架整合开发 Spring概念与IOC入门Spring概念 Spring是开源的轻量级框架 Spring的核心包括两个部分&emsp;&emsp;-aop：面向切面编程，扩展功能不是修改源代码实现&emsp;&emsp;-ioc：控制反转&emsp;&emsp;&emsp;&emsp;- 比如有一个类，在类里面有方法（不是静态的方法），调用类里面的方法，创建类的对象，使用对象调用方法，创建类对象的过程，需要new出来对象。在这里，对象的创建不是通过new方式实现，而是交给spring配置创建类对象 spring是一站式框架&emsp;&emsp;spring在javaee三层结构中，每一层都提供不同的解决技术&emsp;&emsp;&emsp;&emsp;- web层：springMVC&emsp;&emsp;&emsp;&emsp;- service层：spring的ioc&emsp;&emsp;&emsp;&emsp;- dao层：spring的jdbcTemplate Spring的版本&emsp;&emsp;-hibernate：5.x&emsp;&emsp;-Spring4.x（这里学习的版本） Spring的ioc操作 把对象的创建交给spring进行管理 ioc操作两部分：1）ioc的配置文件方式2）ioc的注解方式 IOC底层原理 ioc底层原理使用技术（1）xml配置文件（2）dom4j解决xml（3）工厂设计模式（4）反射 画图分析ioc实现原理 #To be continue…]]></content>
+      <categories>
+        <category>框架</category>
+      </categories>
+      <tags>
+        <tag>Spring</tag>
+        <tag>ssh</tag>
+        <tag>ssm</tag>
+      </tags>
   </entry>
   <entry>
     <title><![CDATA[mybatis学习笔记]]></title>

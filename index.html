@@ -374,7 +374,7 @@
                   <span class="post-meta-item-text">字数统计&#58;</span>
                 
                 <span title="字数统计">
-                  1,065 
+                  3 
                 </span>
               
 
@@ -401,13 +401,15 @@
       
         
           
-            <h1 id="jquery简介"><a href="#jquery简介" class="headerlink" title="jquery简介"></a>jquery简介</h1><h2 id="javascript的缺点"><a href="#javascript的缺点" class="headerlink" title="javascript的缺点"></a>javascript的缺点</h2><ol>
-<li>代码比较麻烦，需要遍历，可能还需要嵌套</li>
-<li>找到对象麻烦，方法少，还长</li>
-<li>会有兼容性问题</li>
-<li>js注册事件，会被覆盖，addEventListener</li>
-</ol>
-<h2 id="jquery的第一个程序"><a href="#jquery的第一个程序" class="headerlink" title="jquery的第一个程序"></a>jquery的第一个程序</h2><figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//1.引入文件</span></span><br><span class="line">&lt;script src="jquery-1.12.4.js"&gt;&lt;/script&gt;</span><br><span class="line">&lt;script&gt;</span><br><span class="line"><span class="comment">//2.写入口函数</span></span><br><span class="line">$(document).ready(function()&#123;</span><br><span class="line">  <span class="comment">//注册事件，把on去掉，是一个方法</span></span><br><span class="line">  $(<span class="string">"#btn1"</span>).click(function()&#123;</span><br><span class="line">    $(<span class="string">"div"</span>).show();</span><br><span class="line">  &#125;);</span><br><span class="line">  $(<span class="string">"btn2"</span>).click(function()&#123;</span><br><span class="line">    <span class="comment">//隐式迭代，jquery会自动遍历，不需要我们遍历</span></span><br><span class="line">    $(<span class="string">"div"</span>).text(<span class="string">"我是内容"</span>);</span><br><span class="line">  &#125;);</span><br><span class="line">&#125;);</span><br><span class="line"></span><br><span class="line">&lt;/script&gt;</span><br></pre></td></tr></table></figure>
+            <h1 id="jquery简介"><a href="#jquery简介" class="headerlink" title="jquery简介"></a>jquery简介</h1><!-- more --!>
+## javascript的缺点
+1. 代码比较麻烦，需要遍历，可能还需要嵌套
+2. 找到对象麻烦，方法少，还长
+3. 会有兼容性问题
+4. js注册事件，会被覆盖，addEventListener
+
+## jquery的第一个程序 
+<figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//1.引入文件</span></span><br><span class="line">&lt;script src="jquery-1.12.4.js"&gt;&lt;/script&gt;</span><br><span class="line">&lt;script&gt;</span><br><span class="line"><span class="comment">//2.写入口函数</span></span><br><span class="line">$(document).ready(function()&#123;</span><br><span class="line">  <span class="comment">//注册事件，把on去掉，是一个方法</span></span><br><span class="line">  $(<span class="string">"#btn1"</span>).click(function()&#123;</span><br><span class="line">    $(<span class="string">"div"</span>).show();</span><br><span class="line">  &#125;);</span><br><span class="line">  $(<span class="string">"btn2"</span>).click(function()&#123;</span><br><span class="line">    <span class="comment">//隐式迭代，jquery会自动遍历，不需要我们遍历</span></span><br><span class="line">    $(<span class="string">"div"</span>).text(<span class="string">"我是内容"</span>);</span><br><span class="line">  &#125;);</span><br><span class="line">&#125;);</span><br><span class="line"></span><br><span class="line">&lt;/script&gt;</span><br></pre></td></tr></table></figure>
 <h2 id="什么是jquery？"><a href="#什么是jquery？" class="headerlink" title="什么是jquery？"></a>什么是jquery？</h2><p>&emsp;&emsp;jquery就是一个轻量级的js库，它有丰富的api可供调用，学习jquery其实就是学习jquery里的api。</p>
 <h2 id="jquery的版本问题"><a href="#jquery的版本问题" class="headerlink" title="jquery的版本问题"></a>jquery的版本问题</h2><ul>
 <li><p>1.x,2.x,3.x版本的区别<br>&emsp;&emsp;1.x版本和2.x版本是同步发布的，但1.x版本支持ie678,2.x不支持；且两个版本不再更新<br>&emsp;&emsp;3.x不兼容ie678，且3.x版本还在更新；</p>
@@ -447,11 +449,28 @@
 </li>
 <li><p>过滤选择器：这类选择器都带冒号，（如 li:first 为第一个li标签）</p>
 </li>
-<li><p>筛选选择器<br>&emsp;&emsp;与过滤选择器类似，但是用法不同，筛选选择器主要是方法<br>名称|用法|描述<br>:-:|:-:|:-:<br>children(selector)|<code>$(“ul”).children(“li”)</code> |相当于<code>$(“ul&gt;li”)</code>,子类选择器<br>find(selector)|同上|相当于后代选择器<br>siblings(selector)|同上|查找兄弟节点，但不包括自己<br>parent()|同上|查找父母节点<br>eq(index)|同上|查找下标为index的节点<br>next()|同上|查找下一个兄弟节点<br>prev()|同上|查找上一个兄弟节点<br>index()|同上|返回当前兄弟节点中的下标</p>
+<li><p>筛选选择器<br>&emsp;&emsp;与过滤选择器类似，但是用法不同，筛选选择器主要是方法</p>
 </li>
 </ul>
+<table>
+<thead>
+<tr>
+<th style="text-align:center">名称</th>
+<th style="text-align:center">用法</th>
+<th style="text-align:center">描述</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center">children(selector)</td>
+<td style="text-align:center"><code>$(“ul”).children(“li”)</code></td>
+<td style="text-align:center">相当于<code>$(“ul&gt;li”)</code>,子类选择器</td>
+</tr>
+</tbody>
+</table>
+<p>find(selector)|同上|相当于后代选择器<br>siblings(selector)|同上|查找兄弟节点，但不包括自己<br>parent()|同上|查找父母节点<br>eq(index)|同上|查找下标为index的节点<br>next()|同上|查找下一个兄弟节点<br>prev()|同上|查找上一个兄弟节点<br>index()|同上|返回当前兄弟节点中的下标</p>
 <p>###未完待续</p>
-
+-->
           
         
       
@@ -2123,7 +2142,7 @@ clazz.newInstance();
     
       <span class="post-meta-item-text">Site words total count&#58;</span>
     
-    <span title="Site words total count">50.3k</span>
+    <span title="Site words total count">49.2k</span>
   
 </div>
 <!--
